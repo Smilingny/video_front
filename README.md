@@ -1,29 +1,16 @@
-# OnlienVideo-vue
+#### 2023/11/21
 
-This template should help get you started developing with Vue 3 in Vite.
+1.新增加的依赖如下：
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+"@element-plus/icons-vue": "^2.1.0",
+"element-plus": "^2.4.2",
+"font-awesome": "^4.7.0",
+"normalize.css": "^8.0.1",
 ```
 
-### Compile and Hot-Reload for Development
+2.长宽使用的单位为vw；
 
-```sh
-npm run dev
-```
+首页主键命名为：index.vue 头部为: Header.vue 尾部为：Footer.vue 
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+我的：info_0.vue 
