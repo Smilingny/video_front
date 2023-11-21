@@ -32,26 +32,9 @@ const {url} = toRefs(state)
     </div>
   </header>
   <!--  标签页-->
-  <div class="tabs">
-    <el-tabs  class="demo-tabs"   type="border-card">
-      <el-tab-pane label="推荐" name="first">
-        <span>中间部分内容</span>
-      </el-tab-pane>
-      <el-tab-pane label="热门" name="second">
-        <span>可以填写在这个位置</span>
-      </el-tab-pane>
-      <el-tab-pane label="饮食" name="third">
-        <span>实现自然切换</span>
-      </el-tab-pane>
-      <el-tab-pane label="游戏" name="fourth">
-        <span>要注意头部</span>
-      </el-tab-pane>
-    </el-tabs>
 
-  </div>
   <!--文字显示部分-->
 </template>
-
 <style scoped>
 header {
   position: fixed;
@@ -100,10 +83,6 @@ header .header-part_2 .item {
   margin-top: 2vw;
   margin-right: 2vw;
 }
-.tabs{
-  margin-top: 15vw;
-  width: 100vw;
 
-}
 
 </style>

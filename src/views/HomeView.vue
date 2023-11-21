@@ -13,19 +13,17 @@ const images = ref([1, 2, 3, 4, 5])
       <van-swipe-item v-for="image in images">{{ image }}</van-swipe-item>
     </van-swipe>
 
-
     <div class="videoList">
       <VideoCard v-for="i in 20"/>
     </div>
   </div>
-
 
 </template>
 
 <style scoped>
 .content {
   position: relative;
-  top: 6vh;
+  top: 7vh;
   padding: 0.5rem;
 }
 

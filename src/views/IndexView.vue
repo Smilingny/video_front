@@ -1,12 +1,18 @@
 <script setup>
 
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
   <div class="content">
-    <div class="top"></div>
+    <div class="top">
+      <Header/>
+    </div>
     <RouterView/>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <Footer/>
+    </div>
   </div>
 </template>
 
@@ -17,10 +23,11 @@
 }
 
 .bottom {
-  height: 6vh;
+  height: 6vw;
   width: 100vw;
   background-color: lightskyblue;
   position: fixed;
+  left: 0;
   bottom: 0;
 }
 

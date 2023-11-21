@@ -5,7 +5,5 @@
 <template>
   <Video/>
 </template>
-
 <style scoped>
-
 </style>

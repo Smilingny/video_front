@@ -1,12 +1,17 @@
 <script setup>
+function goToInfo(){
+  window.location.href = '/info_0';
+}
+function goToIndex(){
+  window.location.href = '/';
+}
 
-import {House} from "@element-plus/icons-vue";
 </script>
 
 <template>
   <div class="footer">
     <!--首页-->
-    <div >
+    <div  @click="goToIndex">
       <i class="fas fa-home"></i>
       <p>首页</p>
     </div>
@@ -25,9 +30,9 @@ import {House} from "@element-plus/icons-vue";
       <p>购物</p>
     </div>
     <!--我的-->
-    <div >
+    <div  @click="goToInfo">
       <i class="fas fa-user-astronaut"></i>
-      <p>购物</p>
+      <p>我的</p>
     </div>
   </div>
 </template>
