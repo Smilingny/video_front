@@ -3,7 +3,10 @@ import './assets/main.css'
 import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router'
-import {Button, Form, Field, CellGroup, Toast, Swipe, SwipeItem, Icon, Popup  } from "vant";
+import {Button, Form, Field, CellGroup, Toast,
+    Swipe, SwipeItem, Icon, Popup, Tab, Tabs,
+    Image as VanImage, Collapse, CollapseItem,
+    Divider,Highlight } from "vant";
 
 import 'vant/lib/index.css';
 import 'normalize.css/normalize.css'
@@ -14,15 +17,10 @@ import '@fortawesome/fontawesome-free/css/all.css'
 const app = createApp(App)
 
 app.use(router)
-    .use(Button)
-    .use(Form)
-    .use(Field)
-    .use(CellGroup)
-    .use(Toast)
-    .use(Swipe)
-    .use(SwipeItem)
-    .use(Icon)
-    .use(Popup);
-app.use(router).use(ElementPlus)
+
+app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(SwipeItem).use(Icon).use(Popup)
+    .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight);
+
+app.use(ElementPlus)
 
 app.mount('#app')

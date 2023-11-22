@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import VideoCard from "@/components/VideoCard.vue";
+import VideoCard from "@/components/video/VideoCard.vue";
 
 const images = ref([1, 2, 3, 4, 5])
 
