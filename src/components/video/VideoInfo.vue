@@ -21,6 +21,7 @@ function cancelFollow() {
 </script>
 
 <template>
+
   <!--  创作者-->
   <div class="owner">
     <div style="display: flex; align-items: center">
@@ -33,7 +34,7 @@ function cancelFollow() {
     <van-button round type="default" v-if="!isFollow" @click="cancelFollow" class="follow">已关注</van-button>
   </div>
 
-<!--  电影信息-->
+  <!--  电影信息-->
   <div class="info">
     <van-collapse v-model="activeName">
       <van-collapse-item name="1">
@@ -44,6 +45,7 @@ function cancelFollow() {
       </van-collapse-item>
     </van-collapse>
   </div>
+
 </template>
 
 <style scoped>
@@ -58,7 +60,7 @@ function cancelFollow() {
   height: 2rem
 }
 
-.info{
+.info {
   margin-top: 1rem;
 }
 

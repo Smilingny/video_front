@@ -3,7 +3,24 @@ import {ref} from "vue";
 import VideoCard from "@/components/video/VideoCard.vue";
 
 const images = ref([1, 2, 3, 4, 5])
+const loading = ref(false)
+const finished = ref(false)
+const pageNumber = ref(1)
+const pageSize = 20;
+const videoList = ref(10)
 
+const nextPage = () => {
+  videoList.value += 10;
+  setTimeout(() => {
+    console.log(loading.value)
+    loading.value = false
+    console.log(loading.value)
+  }, 3000)
+
+  if (videoList.value > 40) {
+    finished.value = true;
+  }
+}
 </script>
 
 <template>
@@ -13,17 +30,23 @@ const images = ref([1, 2, 3, 4, 5])
       <van-swipe-item v-for="image in images">{{ image }}</van-swipe-item>
     </van-swipe>
 
-    <div class="videoList">
-      <VideoCard v-for="i in 20"/>
-    </div>
+    <!--    视频列表-->
+    <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="nextPage"
+    >
+      <div class="videoList">
+        <VideoCard v-for="i in videoList"/>
+      </div>
+    </van-list>
   </div>
 
 </template>
 
 <style scoped>
 .content {
-  position: relative;
-  top: 7vh;
   padding: 0.5rem;
 }
 

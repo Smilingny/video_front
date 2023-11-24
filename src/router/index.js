@@ -17,9 +17,16 @@ const router = createRouter({
       ]
     },
     {
-      path: '/videoDetail',
-      name: 'videoDetail',
-      component: () => import('../views/VideoDetailView.vue')
+        path: '/videoDetail',
+        name: 'videoDetail',
+        component: () => import('../views/VideoDetailView.vue'),
+        children: [
+            {
+                path: '/commentDetail',
+                name: 'commentDetail',
+                component: () => import('../components/video/CommentDetail.vue')
+            }
+        ]
     },
     {
       path: '/login',

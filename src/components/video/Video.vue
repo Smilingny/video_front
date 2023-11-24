@@ -1,57 +1,62 @@
-
-
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
+import Dplayer from 'dplayer';
 
 const videoPlayer = ref(null);
+let dp;
+import vueDanmaku from 'vue3-danmaku'
 
-const togglePlay = () => {
-  if (videoPlayer.value.paused) {
-    videoPlayer.value.play();
-  } else {
-    videoPlayer.value.pause();
-  }
-}
+const danmus = ref(['danmu1', 'danmu2', 'danmu3', '...'])
+onMounted(() => {
+  dp = new Dplayer({
+    container: videoPlayer.value,
+    video: {
+      url: 'ynu.mp4',
+      type: 'auto',
+      pic: 'god.jpg'
+    },
+    theme: '#FADFA3',
+    loop: true,
+    lang: 'zh-cn',
+    hotkey: true,
+    preload: 'auto',
+    volume: 0.7,
+    mutex: true,
+    danmaku: {
+      id: '9E2E3368B56CDBB4',
+      api: 'https://api.prprpr.me/dplayer/',
+      token: 'tokendemo',
+      maximum: 1000,
+      user: 'DIYgod',
+      bottom: '15%',
+      unlimited: true,
+      speedRate: 0.5,
+    },
+  });
 
-// 判定双击事件
-let lastTouchTime = 0;
-const handleTouch = () => {
-  const currentTime = new Date().getTime();
-  const tapLength = currentTime - lastTouchTime;
-  if (tapLength < 500 && tapLength > 0) {
-    togglePlay(); // 触发双击事件后执行播放暂停切换
-  }
-  lastTouchTime = currentTime;
-};
+});
 
-const showTools = () => {
-  console.log('showTools');
-};
+
+
+
 </script>
 
 <template>
-  <div>
-    <video ref="videoPlayer" class="video" autoplay @touchstart="handleTouch" >
-      <source src="../../../public/ynu.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <div class="videoBox" ref="box" @click="full">
+    <div ref="videoPlayer" class="video"></div>
   </div>
 </template>
 
 
 <style scoped>
-.videoBox{
-  width: 100vw;
+.videoBox {
   position: relative;
-
+  overflow: hidden;
 }
+
 
 .video {
   width: 100vw;
 }
 
-.tools{
-  position: absolute;
-  top:0;
-}
 </style>

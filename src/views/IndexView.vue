@@ -5,39 +5,27 @@ import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
+<div class="wrapper">
+  <Header/>
   <div class="content">
-    <div class="top">
-      <Header/>
-    </div>
     <RouterView/>
-    <div class="bottom">
-      <Footer/>
-    </div>
   </div>
+  <Footer/>
+</div>
 </template>
 
 <style scoped>
-.content {
-  background-color: #f7f8fa;
+.wrapper {
+  position: relative;
   height: 100vh;
 }
 
-.bottom {
-  height: 6vw;
-  width: 100vw;
-  background-color: lightskyblue;
-  position: fixed;
-  left: 0;
-  bottom: 0;
+.content {
+  background-color: #f7f8fa;
+  position: relative;
+  padding-top: 7vh;
+  padding-bottom: 7vh;
 }
 
-.top {
-  height: 6vh;
-  width: 100vw;
-  background-color: lightskyblue;
-  position: fixed;
-  top: 0;
-  z-index: 10
-}
 
 </style>

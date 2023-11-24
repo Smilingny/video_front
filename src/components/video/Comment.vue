@@ -1,19 +1,24 @@
 <script setup>
 import {ref} from 'vue';
+import router from "@/router";
+import CommentDetail from "@/components/video/CommentDetail.vue";
 
 const comments = ref([]);
 const newCommentContent = ref('');
 const replyContent = ref([]);
 const showInput = ref(false)
+const showCommentDetail = ref(false)
+const detailCommentId = ref()
 
 comments.value = [{
+  id: '1',
   avatar: 'god.jpg',
   name: '小明',
   time: '2023-10-10',
   agree: '123',
   content: '非常好看',
   replies: [
-    {content: "我也认为1", from: '张三', to: '李四'},
+    {content: "我也认为1偶分vv哦分VS反对v收费v欧舒丹和vu发表v发v副本v政府", from: '张三', to: '李四'},
     {content: "我也认为2", from: '张三', to: '李二'},
     {content: "我也认为3", from: '宋里', to: '李逵'},
     {content: "我也认为4", from: '王鹏', to: '顶针'},
@@ -24,20 +29,22 @@ comments.value = [{
   ]
 },
   {
+    id: '2',
     avatar: 'god.jpg',
-    name: '小明',
+    name: '小李',
     time: '2023-10-10',
     agree: '123',
     content: '非常好看',
     replies: [
       {content: "我也认为1", from: '张三', to: '李四'},
-      {content: "我也认为2", from: '张三', to: '李二'},
+      {content: "我也认为2", from: '张三', to: '李二麻子'},
       {content: "我也认为3", from: '宋里', to: '李逵'},
     ]
   },
   {
+    id: '3',
     avatar: 'god.jpg',
-    name: '小明',
+    name: '小王',
     time: '2023-10-10',
     agree: '123',
     content: '非常好看',
@@ -56,6 +63,12 @@ const agree = () => {
 
 }
 
+// 进入评论详情
+function toDetail(commentId) {
+  detailCommentId.value = commentId;
+  showCommentDetail.value = true;
+}
+
 const replyTo = () => {
   showInput.value = true;
 }
@@ -67,7 +80,7 @@ const sendReply = (index) => {
 </script>
 
 <template>
-  <div>
+  <div class="commentWrapper">
     <van-divider
         content-position="center"
         :style="{ color: 'black', borderColor: '#ebedf0', padding: '0 16px' }"
@@ -101,7 +114,8 @@ const sendReply = (index) => {
 
           <!--          回复区-->
           <div class="replies">
-            <div v-for="(reply,index) in comment.replies" :key="index" style="display: flex; padding:0.2rem">
+            <div v-for="(reply,index) in comment.replies" :key="index"
+                 style="display: flex; padding:0.2rem;width: 100%" class="van-ellipsis">
               <van-highlight :keywords="reply.from" :source-string="reply.from"/>
               回复
               <van-highlight :keywords="reply.to" :source-string="reply.to"/>
@@ -109,11 +123,10 @@ const sendReply = (index) => {
             </div>
 
             <!--            点击展开全部回复-->
-            <div v-if="comment.replies.length" class="showMore">
+            <div v-if="comment.replies.length" class="showMore" @click="toDetail(comment.id)">
               更多 >
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -135,7 +148,7 @@ const sendReply = (index) => {
           plain
           @click="sendComment"
       >
-        发送评论
+        发送
       </van-button>
     </div>
   </div>
@@ -144,6 +157,7 @@ const sendReply = (index) => {
   <van-popup
       v-model:show="showInput"
       position="bottom"
+      lazy-render
       :style="{ height: '40%' }"
       style="display: flex;flex-direction: column;align-items: center"
   >
@@ -161,14 +175,24 @@ const sendReply = (index) => {
         plain
         @click=""
     >
-      发送评论
+      发送
     </van-button>
   </van-popup>
 
+  <!--  评论详情-->
+  <van-popup
+      v-model:show="showCommentDetail"
+      position="bottom"
+      lazy-render
+      :style="{ height: '70%' }"
+  >
+    <CommentDetail :comment-id="detailCommentId"/>
+  </van-popup>
 
 </template>
 
 <style scoped>
+
 .newComment {
   background-color: white;
   display: flex;
@@ -188,6 +212,8 @@ const sendReply = (index) => {
 
 .comment {
   margin: 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ebedf0;
 }
 
 .commentator {

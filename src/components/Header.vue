@@ -38,11 +38,12 @@ const {url} = toRefs(state)
 <style scoped>
 header {
   position: fixed;
+  z-index: 10;
   left: 0;
   top: 0;
   display: flex;
   width: 100vw;
-  height: 15vw;
+  height: 7vh;
   background-color: #8ec3eb;
   justify-content: space-between;
   align-items: center;
