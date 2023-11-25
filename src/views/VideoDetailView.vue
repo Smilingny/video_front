@@ -1,9 +1,9 @@
 <script setup>
-import Video from "@/components/video/Video.vue";
 import VideoInfo from "@/components/video/VideoInfo.vue";
 import Comment from "@/components/video/Comment.vue";
 import {useRouter} from "vue-router";
 import {ref} from "vue";
+import ArtVideo from "@/components/video/ArtVideo.vue";
 
 
 const router = useRouter();
@@ -35,7 +35,7 @@ const head = ref(true)
     </div>
 
     <!--  视频-->
-    <Video @click="head=!head"/>
+    <ArtVideo @click="head=!head"/>
 
     <!--  广告-->
     <div class="ad">这是一条广告</div>
