@@ -7,7 +7,7 @@ import {
     Button, Form, Field, CellGroup, Toast,
     Swipe, SwipeItem, Icon, Popup, Tab, Tabs,
     Image as VanImage, Collapse, CollapseItem,
-    Divider, Highlight, List
+    Divider, Highlight, List, Barrage
 } from "vant";
 
 import 'vant/lib/index.css';
@@ -21,7 +21,8 @@ const app = createApp(App)
 app.use(router)
 
 app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(SwipeItem).use(Icon).use(Popup)
-    .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight).use(List);
+    .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight).use(List)
+    .use(Barrage)
 
 app.use(ElementPlus)
 

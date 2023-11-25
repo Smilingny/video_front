@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "dplayer": "^1.27.1",
+    "dplayer": "^1.25.0",
     "element-plus": "^2.4.2",
     "font-awesome": "^4.7.0",
     "normalize.css": "^8.0.1",
