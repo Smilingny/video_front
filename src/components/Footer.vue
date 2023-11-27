@@ -43,9 +43,10 @@ function goToIndex(){
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 10vw;
+  height: 7vh;
   background-color: #8ec3eb;
   position: fixed;
+  z-index: 10;
   left: 0;
   bottom: 0;
 }

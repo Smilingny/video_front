@@ -6,7 +6,7 @@ import router from "@/router";
 const videoHot = ref('123')
 const videoLike = ref('234')
 const videoLength = ref('11:46')
-const videoTitle = ref('教父Ⅱ解说')
+const videoTitle = ref('教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说')
 const videoOwner = ref('黑马')
 const showButton = ref(false)
 const feedback = ref('')
@@ -23,7 +23,7 @@ function submitFeedback(){
     <div class="card-part1" @click="router.push('/videoDetail')">
       <!--      图片-->
       <div class="img">
-        <img src="../../public/god.jpg" style="height: 100%;width:100%;border-radius: 5px"/>
+        <img src="../../../public/god.jpg" style="height: 100%;width:100%;border-radius: 5px" alt="poster"/>
       </div>
       <div class="imgInfo">
         <!--        观看人数-->
@@ -40,18 +40,18 @@ function submitFeedback(){
 
         <!--        视频时长-->
         <div class="info">
-          <p>{{ videoLength }}</p>
+          <p>{{ videoLength }}&nbsp;</p>
         </div>
       </div>
     </div>
     <div class="card-part2">
 
       <!--      视频标题-->
-      <h3 @click="router.push('/videoDetail')">{{ videoTitle }}</h3>
+      <p @click="router.push('/videoDetail')" class="title van-multi-ellipsis--l2">{{ videoTitle }}</p>
       <div class="owner">
 
         <!--        视频作者-->
-        <p style="font-size: 0.7rem">{{ videoOwner }}</p>
+        <p style="font-size: 0.7rem" class="van-ellipsis">{{ videoOwner }}</p>
 
         <!--        反馈按钮-->
         <van-icon @click="showButton=!showButton" name="question-o"/>
@@ -85,18 +85,18 @@ function submitFeedback(){
   height: 20vh;
   background-color: white;
   margin: 2vw 0 0 2vw;
-  box-shadow: 0 3px 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
 .card-part1 {
   position: relative;
-  height: 70%;
+  height: 65%;
 }
 
 .card-part2 {
   position: relative;
   padding: 1vw;
-  height: 30%;
+  height: 35%;
 }
 
 .img {
@@ -110,6 +110,7 @@ function submitFeedback(){
   bottom: 0;
   left: 0;
   margin: 1vw;
+  height: 1rem;
   padding-right: 1vw;
   width: 98%;
   color: white;
@@ -122,6 +123,11 @@ function submitFeedback(){
   align-items: center;
 }
 
+.title {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
 .owner {
   width: 96%;
   position: absolute;
@@ -129,5 +135,6 @@ function submitFeedback(){
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: grey;
 }
 </style>
