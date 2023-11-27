@@ -21,7 +21,6 @@ const toRegister = () => {
 };
 </script>
 
-
 <template>
   <div class="login">
     <h2>账号登录</h2>
