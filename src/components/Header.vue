@@ -3,12 +3,20 @@
 
 import {reactive, toRefs} from "vue";
 import {Message, Search} from "@element-plus/icons-vue";
+import {useRouter} from "vue-router";
+
 
 const state = reactive({
   url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
 })
 
 const {url} = toRefs(state)
+const router = useRouter()
+/*导向信封页面*/
+function goToLetter(){
+  router.push('/letterIconView')
+}
+
 </script>
 
 <template>
@@ -24,11 +32,9 @@ const {url} = toRefs(state)
     </div>
     <!-- 信封部分-->
     <div class="header-part_2">
-      <el-badge value="1" class="item">
-        <el-icon color="white" size="8vw">
+        <el-icon color="white" size="7vw" @click="goToLetter">
           <Message/>
         </el-icon>
-      </el-badge>
     </div>
   </header>
   <!--  标签页-->
@@ -43,7 +49,7 @@ header {
   top: 0;
   display: flex;
   width: 100vw;
-  height: 7vh;
+  height: 15vw;
   background-color: #8ec3eb;
   justify-content: space-between;
   align-items: center;
@@ -57,6 +63,7 @@ header .header-part_0 {
   align-items: center;
   height: 9vw;
   width: 10vw;
+  margin-right: 2vw;
 }
 
 header .header-part_1 {
@@ -78,12 +85,5 @@ header .header-part_2 {
   height: 8vw;
   width: 10vw;
 }
-
-/*设置消息数样式*/
-header .header-part_2 .item {
-  margin-top: 2vw;
-  margin-right: 2vw;
-}
-
 
 </style>

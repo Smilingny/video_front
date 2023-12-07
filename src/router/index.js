@@ -41,15 +41,27 @@ const router = createRouter({
     {
       path:'/info_0',
       name:'info_0',
-      component:()=>import('../views/info_0.vue')
+      component:()=>import('../views/Info.vue')
     },
 
     {
-      path:'/loadVideo',
-      name: 'test1',
+      path:'/uploadVideo',
+      name: 'UploadVideo',
       component:()=>import('../views/UploadVideo.vue')
 
-    }
+    },
+      {
+          path:'/letterIconView',
+          name: 'LetterIconView',
+          component:()=>import('../views/LetterIconView.vue')
+
+      },
+      {
+          path:'/listItemDetail/:Title',
+          name: 'ListItemDetail',
+          component:()=>import('../views/ListItemDetail.vue')
+
+      },
   ]
 })
 
