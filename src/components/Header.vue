@@ -17,6 +17,10 @@ function goToLetter(){
   router.push('/letterIconView')
 }
 
+/*搜索导向函数，直接导向搜索结果界面*/
+function goToSearchResult(){
+  router.push('/searchResult')
+}
 </script>
 
 <template>
@@ -27,7 +31,7 @@ function goToLetter(){
       <el-avatar :size="28" :src="url"/>
     </div>
     <!--  搜索框部分-->
-    <div class="header-part_1">
+    <div class="header-part_1" @click="goToSearchResult">
       <el-input placeholder="搜索" :prefix-icon="Search" size="small"></el-input>
     </div>
     <!-- 信封部分-->

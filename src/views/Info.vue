@@ -161,7 +161,7 @@ const {url} = toRefs(state)
             <!--图标-->
             <div class="left">
               <i class="fas fa-users"></i>
-              <span>青少年守护</span>
+              <span>后台管理</span>
             </div>
             <!--            图标-->
             <div class="right">
