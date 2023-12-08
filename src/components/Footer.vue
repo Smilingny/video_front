@@ -4,7 +4,7 @@ import {useRouter} from "vue-router";
 
 const router = useRouter()
 function goToInfo(){
-  router.push('/info_0');
+  router.push('/info');
 }
 function goToIndex(){
   router.push('/');

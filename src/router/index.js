@@ -38,36 +38,70 @@ const router = createRouter({
       name: 'register',
       component: () => import('../views/Register.vue')
     },
+      /*个人信息展示界面*/
     {
-      path:'/info_0',
-      name:'info_0',
+      path:'/info',
+      name:'info',
       component:()=>import('../views/Info.vue')
     },
 
+      /*上传视频界面*/
     {
       path:'/uploadVideo',
       name: 'UploadVideo',
       component:()=>import('../views/UploadVideo.vue')
 
     },
+      /*信封图标界面*/
       {
           path:'/letterIconView',
           name: 'LetterIconView',
           component:()=>import('../views/LetterIconView.vue')
 
       },
+      /*消息显示界面*/
       {
           path:'/listItemDetail/:Title',
           name: 'ListItemDetail',
           component:()=>import('../views/ListItemDetail.vue')
 
       },
+      /*搜索结果界面*/
       {
           path:'/searchResult',
           name: 'SearchResult',
           component:()=>import('../views/SearchResultvView.vue')
-
       },
+      /*编辑个人信息界面*/
+      {
+          path:'/editeUserInfo',
+          name: 'EditeUserInfo',
+          component:()=>import('../views/EditeUserInfo.vue')
+      },
+      /*后台管理界面路由*/
+      {
+          path:'/backgroundView',
+          name: 'BackgroundView',
+          component:()=>import('../views/BackgroundView.vue'),
+          children:[
+              {
+                  path:'/user',
+                  name:'User',
+                  component:()=> import("../components/BackgroundComponent/UserInfo.vue")
+              },
+              {
+                  path:'/community',
+                  name:'Community',
+                  component:()=> import("../components/BackgroundComponent/ComunityManager.vue")
+              },
+              {
+                  path:'/data',
+                  name:'Data',
+                  component:()=> import("../components/BackgroundComponent/Data.vue")
+              },
+
+          ]
+      }
   ]
 })
 

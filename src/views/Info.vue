@@ -1,13 +1,22 @@
 <script setup>
 import {reactive, toRefs} from "vue";
 import Footer from "@/components/Footer.vue";
+import {useRouter} from "vue-router";
 
 const state = reactive({
   url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
 })
 
 const {url} = toRefs(state)
-
+const router = useRouter()
+/*路由到相应的编辑界面*/
+function goToEdite(){
+  router.push('/editeUserInfo')
+}
+/*前往后台管理界面*/
+function goToBack(){
+  router.push('/backgroundView')
+}
 </script>
 
 <template>
@@ -17,15 +26,14 @@ const {url} = toRefs(state)
       <!--头像部分-->
       <div class="top">
         <!--头像-->
-        <div class="left" style="flex: 1">
+        <div class="left" style="width: 20%">
           <el-avatar :size="45" :src="url" style="margin-left: 2vw"/>
         </div>
         <!-- 相关个人信息-->
-        <div class="right" style="flex: 1">
-          <span style="color: white">昵称</span>
-          <i class="fas fa-edit" style="margin-left: 1vw;color: white"></i>
+        <div class="right" style="width: 80%">
+          <span style="color: white">用户昵称</span>
+          <i class="fas fa-edit" style="margin-left: 5vw;color: white" @click="goToEdite"></i>
         </div>
-        <div style="flex: 3"></div>
       </div>
       <!--数据显示部分-->
       <div class="bottom">
@@ -165,7 +173,7 @@ const {url} = toRefs(state)
             </div>
             <!--            图标-->
             <div class="right">
-              <i class="fas fa-angle-right"></i>
+              <i class="fas fa-angle-right" @click="goToBack"></i>
             </div>
           </div>
           <div class="line">
@@ -209,6 +217,7 @@ const {url} = toRefs(state)
   height: 20vw;
   background-color: #8ec3eb;
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 }
