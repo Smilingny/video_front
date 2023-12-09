@@ -9,7 +9,6 @@ onMounted(() => {
   const art = new Artplayer({
     container: artRef.value,
     url: 'ynu.mp4',
-    autoMini: true,
     setting: true,
     hotkey: true,
     fullscreen: true,

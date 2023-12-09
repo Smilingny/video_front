@@ -2,17 +2,32 @@
 import {ref} from "vue";
 import router from "@/router";
 import {showToast} from "vant";
+import {login} from "@/api/user";
 
 const account = ref('');
 const password = ref('');
-const onSubmit = (values) => {
-  console.log('submit', values);
-  showToast({
-    message: '登录成功',
-    type: 'success',
-    duration: 1000,
-  });
-  router.push('/')
+const onSubmit = (user) => {
+  console.log('submit', user);
+  login(user).then((res) => {
+    console.log(res);
+    if (res.data) {
+      localStorage.setItem('token', res.data.data.token);
+      showToast({
+        message: '登录成功',
+        type: 'success',
+        duration: 1000,
+      });
+      router.push('/');
+    }
+  }).catch((err) => {
+    console.log(err);
+    showToast({
+      message: '登录失败',
+      type: 'fail',
+      duration: 1000,
+    });
+  })
+
 };
 
 const toRegister = () => {
@@ -28,7 +43,7 @@ const toRegister = () => {
       <van-cell-group inset>
         <van-field
             v-model="account"
-            name="account"
+            name="username"
             label="账号"
             placeholder="账号"
             :rules="[{ required: true, message: '请填写账号' }]"

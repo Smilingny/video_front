@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header.vue";
 import {Plus, UploadFilled} from "@element-plus/icons-vue";
-import VideoCard from "@/components/VideoCard.vue";
+import VideoCard from "@/components/video/VideoCard.vue";
 const  url = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
 </script>
 

@@ -1,13 +1,17 @@
 <script setup>
 
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import router from "@/router";
+import {getVideoInfo} from "@/api/video";
 
+const videoId = ref(1)
 const avatar = ref('../../public/god.jpg')
 const owner = ref('黑马')
 const isFollow = ref(true)
 const title = ref('教父Ⅱ解说')
 const info = ref('《教父第二部》是1974年上映的一部美国电影，由弗朗西斯·福特·科波拉执导，是《教父》三部曲的第二部。这部电影被认为是电影史上最杰出的作品之一，也是商业上的成功，获得了广泛的赞誉和奖项。')
 const activeName = ref([])
+
 
 // 点击关注
 function follow() {
@@ -18,13 +22,23 @@ function follow() {
 function cancelFollow() {
   isFollow.value = !isFollow.value
 }
+
+onMounted(() => {
+  getVideoInfo(1).then((res) => {
+    const data = res.data.data;
+    owner.value = data.username;
+    title.value = data.title;
+    info.value = data.briefIntro;
+  })
+})
+
 </script>
 
 <template>
 
   <!--  创作者-->
   <div class="owner">
-    <div style="display: flex; align-items: center">
+    <div style="display: flex; align-items: center" @click="router.push('userHome')">
       <van-image round width="3rem" height="3rem" :src="avatar"/>
       <h3 style="margin: 0 1rem">{{ owner }}</h3>
     </div>

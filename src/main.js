@@ -1,6 +1,7 @@
 import './assets/main.css'
 
 import {createApp} from 'vue'
+import {createPinia} from 'pinia'
 import App from './App.vue'
 import router from './router'
 import {
@@ -15,10 +16,16 @@ import 'normalize.css/normalize.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import axiosInstance from "@/axios";
+import mockWebSocket from "@/mockSocket";
 
 const app = createApp(App)
+const pinia = createPinia()
+
+app.config.globalProperties.$axios = axiosInstance
 
 app.use(router)
+app.use(pinia)
 
 app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(SwipeItem).use(Icon).use(Popup)
     .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight).use(List)
@@ -26,4 +33,5 @@ app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(Sw
 
 app.use(ElementPlus)
 
+app.provide('mockWebSocket', mockWebSocket)
 app.mount('#app')
