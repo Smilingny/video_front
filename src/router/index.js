@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 
 
 const router = createRouter({
@@ -41,32 +41,31 @@ const router = createRouter({
         {
             path: '/info_0',
             name: 'info_0',
-            component: () => import('../views/info_0.vue')
+            component: () => import('../views/info.vue')
         },
 
-    {
-      path:'/uploadVideo',
-      name: 'UploadVideo',
-      component:()=>import('../views/UploadVideo.vue')
+        {
+            path: '/uploadVideo',
+            name: 'UploadVideo',
+            component: () => import('../views/UploadVideo.vue')
+        },
         {
             path: '/loadVideo',
             name: 'test1',
             component: () => import('../views/UploadVideo.vue')
 
-    },
-      {
-          path:'/letterIconView',
-          name: 'LetterIconView',
-          component:()=>import('../views/LetterIconView.vue')
+        },
+        {
+            path: '/letterIconView',
+            name: 'LetterIconView',
+            component: () => import('../views/LetterIconView.vue')
 
-      },
-      {
-          path:'/listItemDetail/:Title',
-          name: 'ListItemDetail',
-          component:()=>import('../views/ListItemDetail.vue')
+        },
+        {
+            path: '/listItemDetail/:Title',
+            name: 'ListItemDetail',
+            component: () => import('../views/ListItemDetail.vue')
 
-      },
-  ]
         },
         {
             path: '/userHome',
@@ -83,7 +82,6 @@ const router = createRouter({
             name: 'chat',
             component: () => import('../views/ad/ChatView.vue')
         }
-
     ]
 })
 
