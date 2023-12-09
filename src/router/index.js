@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 
 const router = createRouter({
@@ -44,11 +44,29 @@ const router = createRouter({
             component: () => import('../views/info_0.vue')
         },
 
+    {
+      path:'/uploadVideo',
+      name: 'UploadVideo',
+      component:()=>import('../views/UploadVideo.vue')
         {
             path: '/loadVideo',
             name: 'test1',
             component: () => import('../views/UploadVideo.vue')
 
+    },
+      {
+          path:'/letterIconView',
+          name: 'LetterIconView',
+          component:()=>import('../views/LetterIconView.vue')
+
+      },
+      {
+          path:'/listItemDetail/:Title',
+          name: 'ListItemDetail',
+          component:()=>import('../views/ListItemDetail.vue')
+
+      },
+  ]
         },
         {
             path: '/userHome',

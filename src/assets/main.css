@@ -2,3 +2,20 @@ html,body{
   width: 100%;
   height: 100%;
 }
+.myHeader{
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: 100vw;
+  height: 15vw;
+
+  background-color: #8ec3eb;
+  justify-content: space-around;
+  align-items: center;
+}
+.myHeader .title {
+  color: white;
+  font-size: 6vw;
+}

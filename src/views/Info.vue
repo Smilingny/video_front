@@ -18,7 +18,7 @@ const {url} = toRefs(state)
       <div class="top">
         <!--头像-->
         <div class="left" style="flex: 1">
-          <el-avatar :size="65" :src="url" style="margin-left: 2vw"/>
+          <el-avatar :size="45" :src="url" style="margin-left: 2vw"/>
         </div>
         <!-- 相关个人信息-->
         <div class="right" style="flex: 1">
@@ -236,6 +236,7 @@ const {url} = toRefs(state)
 
 .wrapper .header .bottom .data p {
   margin-top: 1vw;
+  font-size:3vw;
   color: aliceblue;
 }
 

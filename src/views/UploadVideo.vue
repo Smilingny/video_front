@@ -1,9 +1,12 @@
 <script setup>
 
-import Header from "@/components/Header.vue";
 import {Plus, UploadFilled} from "@element-plus/icons-vue";
-import VideoCard from "@/components/video/VideoCard.vue";
+import {useRouter} from "vue-router";
 const  url = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+const router = useRouter()
+function goToIndex(){
+  router.push('/')
+}
 </script>
 
 <template>
@@ -11,7 +14,7 @@ const  url = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg
     <!--头部-->
     <div class="header">
     <span style="left: 0;position: absolute;margin-left: 1vw;color: white;font-size: 8vw">
-      <i class="fas fa-angle-left"></i>
+      <i class="fas fa-angle-left" @click="goToIndex"></i>
     </span>
       <div class="title">
         <span>上传视频</span>
@@ -39,10 +42,6 @@ const  url = 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg
         </el-upload>
       </div>
 
-      <video  style="width: 100vw;height: 20vw" autoplay>
-        <source src="../../public/ynu.mp4" type="video/mp4" />
-
-      </video>
       <!--封面相关-->
       <div class="select">
 

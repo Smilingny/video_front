@@ -18,12 +18,27 @@ import 'element-plus/dist/index.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import axiosInstance from "@/axios";
 import mockWebSocket from "@/mockSocket";
+import {
+    getCurDate,
+    getLocalStorage,
+    getSessionStorage, removeLocalStorage,
+    removeSessionStorage,
+    setLocalStorage,
+    setSessionStorage
+} from "@/common";
 
 const app = createApp(App)
 const pinia = createPinia()
 
 app.config.globalProperties.$axios = axiosInstance
 
+app.provide("$getCurDate", getCurDate)
+app.provide("$setSessionStorage", setSessionStorage)
+app.provide("$getSessionStorage", getSessionStorage)
+app.provide("$removeSessionStorage", removeSessionStorage)
+app.provide("$setLocalStorage", setLocalStorage)
+app.provide("$getLocalStorage", getLocalStorage)
+app.provide("$removeLocalStorage", removeLocalStorage)
 app.use(router)
 app.use(pinia)
 

@@ -1,11 +1,17 @@
 <script setup>
+
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 function goToInfo(){
-  window.location.href = '/info_0';
+  router.push('/info_0');
 }
 function goToIndex(){
-  window.location.href = '/';
+  router.push('/');
 }
-
+function goToUploadVideo(){
+  router.push('/uploadVideo')
+}
 </script>
 
 <template>
@@ -21,8 +27,8 @@ function goToIndex(){
       <p>动态</p>
     </div>
     <!--视频发布-->
-    <div style="background-color: #F16141;width: 8vw;height: 8vw;border-radius: 20%;margin-bottom: 2vw">
-      <i class="fas fa-plus" style="font-size: 4vw"></i>
+    <div style="background-color: #F16141;width: 8vw;height: 8vw;border-radius: 20%;margin-bottom: 2vw" @click="goToUploadVideo">
+      <i class="fas fa-plus" style="font-size: 4vw" ></i>
     </div>
     <!--购物-->
     <div >
@@ -43,7 +49,7 @@ function goToIndex(){
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 7vh;
+  height: 15vw;
   background-color: #8ec3eb;
   position: fixed;
   z-index: 10;
