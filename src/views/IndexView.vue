@@ -7,7 +7,7 @@ import Footer from "@/components/Footer.vue";
 <template>
 <div class="wrapper">
   <Header/>
-  <div class="content">
+  <div class="main">
     <RouterView/>
   </div>
   <Footer/>
@@ -20,7 +20,7 @@ import Footer from "@/components/Footer.vue";
   height: 100vh;
 }
 
-.content {
+.main {
   background-color: #f7f8fa;
   position: relative;
   padding-top: 7vh;
