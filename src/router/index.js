@@ -99,9 +99,14 @@ const router = createRouter({
                   name:'Data',
                   component:()=> import("../components/BackgroundComponent/Data.vue")
               },
-
           ]
-      }
+      },
+      /*测试聊天窗口*/
+      {
+          path:'/test',
+          name:'chat',
+          component:()=> import("../views/chatView.vue")
+      },
   ]
 })
 

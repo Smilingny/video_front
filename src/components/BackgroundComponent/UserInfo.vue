@@ -72,7 +72,7 @@ const tableData = ref([
 <style scoped>
 .wrapper {
   display: flex;
-  width: 70vw;
+  width: 60vw;
   flex-direction: column;
 }
 
