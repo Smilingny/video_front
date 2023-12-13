@@ -1,0 +1,31 @@
+{
+  "VideoInfo": {
+    "host": null,
+    "code": 200,
+    "data": {
+      "id": 4,
+      "videoId": 20,
+      "type": "1080p60hz",
+      "username": "方小美",
+      "title": "test20",
+      "briefIntro": "test20",
+      "url": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/1080p60hz_test20/video/1080p60hz_test20.mp4",
+      "sumLike": 0,
+      "sumCoins": 0,
+      "sumCollect": 0,
+      "sumShare": 0,
+      "sumView": 0,
+      "sumDanMu": 0,
+      "publishTime": null
+    },
+    "message": "操作成功"
+  },
+  "login": {
+    "host": null,
+    "code": 200,
+    "data": {
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyLnlKjmiLfouqvku70iOlt7ImlkIjoyLCJuYW1lIjoi55So5oi3In1dLCLnlKjmiLfmnYPpmZAiOlsic2VhcmNoVXNlclRlc3QiLCIvYWN0aXZpdHkvc2VhcmNoIiwiL2FsdW1uaS9zZWFyY2giLCIvYWx1bW5pIl0sIueUqOaIt05hbWUiOiLlsI_nmb0iLCLnlKjmiLdJZCI6MiwiZXhwIjoxNzAxODcxMjQ0LCJpYXQiOjE3MDE4NjIyNDR9.jpl6lxjBb_KVbiJ4RqUXu3SrJO6AejF2Fio6n8YsvrM"
+    },
+    "message": "操作成功"
+  }
+}
