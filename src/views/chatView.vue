@@ -161,7 +161,6 @@ function send(){
 }
 /*中间部分样式的设定*/
 .wrapper .middle{
-  margin-top: 15vw;
   display: flex;
   flex-direction: column;
   margin-bottom: 15vw;

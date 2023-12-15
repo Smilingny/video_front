@@ -6,18 +6,15 @@ const tableData = ref([
   {
     userId:10001,
     userName:"张三",
-    passwd:123456
+    passwd:123456,
+    age:12,
+    sex:"男",
+    profilePhone:null,
+    phone:123456789,
+    email:123456
   },
-  {
-    userId:10001,
-    userName:"张三",
-    passwd:123456
-  },
-  {
-    userId:10001,
-    userName:"张三",
-    passwd:123456
-  },
+
+
 ])
 </script>
 
@@ -36,14 +33,22 @@ const tableData = ref([
           :data="tableData"
           border
           stripe
-          style="width:90%"
+          style="width:100%"
       >
         <!--设置用户管理中可能字段-->
         <el-table-column prop="userId" label="用户编号"/>
         <el-table-column prop="userName" label="用户名"/>
         <el-table-column prop="passwd" label="密码"/>
+        <el-table-column prop="age" label="年龄"/>
+        <el-table-column prop="sex" label="性别"/>
+        <el-table-column prop="phone" label="联系电话" width="95"/>
+        <el-table-column prop="email" label="邮箱"/>
+
+
+
+
         <!--操作部分-->
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="150">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
             <el-popconfirm title="确认删除吗?" @confirm="handleDelete( scope.row.id)">

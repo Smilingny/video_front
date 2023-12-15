@@ -117,7 +117,6 @@ onMounted(() => {
         <h2 style="margin: 20px auto;">张三</h2>
       </div>
       <div class="main" ref="chatScroll">
-
         <div v-for="item in chats">
           <p class="chat" :class="{chatLeft: item.type==='receive',chatRight: item.type==='send'}">
             {{ item.content }}

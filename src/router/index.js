@@ -105,7 +105,7 @@ const router = createRouter({
       {
           path:'/test',
           name:'chat',
-          component:()=> import("../views/chatView.vue")
+          component:()=> import("../views/showVedio.vue")
       },
   ]
 })

@@ -1,6 +1,7 @@
 <script setup>
 
 import {useRouter} from "vue-router";
+import {ref} from "vue";
 
 const router = useRouter()
 function goToInfo(){
@@ -12,35 +13,17 @@ function goToIndex(){
 function goToUploadVideo(){
   router.push('/uploadVideo')
 }
+/*存储相应的激活方式*/
+const active =ref(0)
 </script>
 
 <template>
-  <div class="footer">
-    <!--首页-->
-    <div  @click="goToIndex">
-      <i class="fas fa-home"></i>
-      <p>首页</p>
-    </div>
-    <!--动态-->
-    <div >
-      <i class="fas fa-shapes"></i>
-      <p>动态</p>
-    </div>
-    <!--视频发布-->
-    <div style="background-color: #F16141;width: 8vw;height: 8vw;border-radius: 20%;margin-bottom: 2vw" @click="goToUploadVideo">
-      <i class="fas fa-plus" style="font-size: 4vw" ></i>
-    </div>
-    <!--购物-->
-    <div >
-      <i class="fas fa-store"></i>
-      <p>购物</p>
-    </div>
-    <!--我的-->
-    <div  @click="goToInfo">
-      <i class="fas fa-user-astronaut"></i>
-      <p>我的</p>
-    </div>
-  </div>
+  <van-tabbar v-model="active">
+    <van-tabbar-item icon="home-o"  @click="goToIndex">首页</van-tabbar-item>
+    <van-tabbar-item icon="search" @click="goToUploadVideo">上传</van-tabbar-item>
+    <van-tabbar-item icon="cash-o">购物</van-tabbar-item>
+    <van-tabbar-item icon="manager-o"  @click="goToInfo">我的</van-tabbar-item>
+  </van-tabbar>
 </template>
 
 <style scoped>

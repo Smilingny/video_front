@@ -8,7 +8,8 @@ import {
     Button, Form, Field, CellGroup, Toast,
     Swipe, SwipeItem, Icon, Popup, Tab, Tabs,
     Image as VanImage, Collapse, CollapseItem,
-    Divider, Highlight, List, Barrage
+    Divider, Highlight, List, Barrage,Uploader,Dialog,Switch,NavBar,Search,Tabbar,TabbarItem,
+    Grid,GridItem,Cell,Rate,RadioGroup,Radio
 } from "vant";
 
 import 'vant/lib/index.css';
@@ -44,9 +45,13 @@ app.use(pinia)
 
 app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(SwipeItem).use(Icon).use(Popup)
     .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight).use(List)
-    .use(Barrage)
+    .use(Barrage).use(Uploader).use(Dialog).use(Switch).use(NavBar).use(Search).use(Tabbar).use(TabbarItem).use(Grid).use(GridItem).use(Cell)
+    .use(Rate).use(RadioGroup).use(Radio);
 
 app.use(ElementPlus)
+
+/*设置相应的路由导航*/
+
 
 app.provide('mockWebSocket', mockWebSocket)
 app.mount('#app')
