@@ -2,11 +2,14 @@
 import {reactive, ref} from 'vue'
 import NewAd from "@/components/ad/NewAd.vue";
 import Message from "@/components/ad/Message.vue";
+import {useStore} from "@/store";
 
-const activeName = ref('first')
+const store = useStore()
+const activeName = store.activeTab
 
 const handleClick = (tab, event) => {
-  console.log(tab, event)
+  console.log(activeName.value)
+
 }
 
 const dialogVisible = ref(false)
@@ -49,7 +52,9 @@ const updateMessage = (message) => {
 
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-    <el-tab-pane label="首页" name="first">广告数据的展示</el-tab-pane>
+    <el-tab-pane label="首页" name="first">
+      广告数据的展示
+    </el-tab-pane>
     <el-tab-pane label="推广" name="second">
       <div class="wrapper">
         <h2>推广列表</h2>
@@ -66,7 +71,7 @@ const updateMessage = (message) => {
     <el-tab-pane label="商业合作" name="third">商业合作</el-tab-pane>
     <el-tab-pane name="four">
       <template v-slot:label>
-        <el-badge :value="newMessage" class="item" :hidden="newMessage==0">
+        <el-badge :value="newMessage" class="item" :hidden="newMessage===0">
           <span style="padding: 7px">消息</span>
         </el-badge>
       </template>

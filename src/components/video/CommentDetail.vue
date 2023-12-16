@@ -2,11 +2,6 @@
 import {defineProps, reactive, ref} from 'vue';
 import SingleComment from "@/components/video/SingleComment.vue";
 
-const props = defineProps({
-  commentId: {
-    required: true
-  }
-});
 
 const user = reactive({
   avatar: 'god.jpg',

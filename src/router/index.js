@@ -17,7 +17,7 @@ const router = createRouter({
             ]
         },
         {
-            path: '/videoDetail',
+            path: '/videoDetail/:id',
             name: 'videoDetail',
             component: () => import('../views/VideoDetailView.vue'),
             children: [

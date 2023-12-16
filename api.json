@@ -8,7 +8,7 @@
       "type": "1080p60hz",
       "username": "方小美",
       "title": "test20",
-      "briefIntro": "test20",
+      "briefIntro": "\"E:\\深度学习原理及平台\\图像检测数据集\\图像检测数据集\\dataTF.zip\"",
       "url": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/1080p60hz_test20/video/1080p60hz_test20.mp4",
       "sumLike": 0,
       "sumCoins": 0,
@@ -27,5 +27,252 @@
       "token": "eyJhbGciOiJIUzI1NiJ9.eyLnlKjmiLfouqvku70iOlt7ImlkIjoyLCJuYW1lIjoi55So5oi3In1dLCLnlKjmiLfmnYPpmZAiOlsic2VhcmNoVXNlclRlc3QiLCIvYWN0aXZpdHkvc2VhcmNoIiwiL2FsdW1uaS9zZWFyY2giLCIvYWx1bW5pIl0sIueUqOaIt05hbWUiOiLlsI_nmb0iLCLnlKjmiLdJZCI6MiwiZXhwIjoxNzAxODcxMjQ0LCJpYXQiOjE3MDE4NjIyNDR9.jpl6lxjBb_KVbiJ4RqUXu3SrJO6AejF2Fio6n8YsvrM"
     },
     "message": "操作成功"
+  },
+  "getVideoList": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 18,
+        "title": "test",
+        "coverUrl": "http://192.168.200.145:9000/public/1/e05cc2d3923f410996bff449234778d3/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      },
+      {
+        "id": 19,
+        "title": "test19",
+        "coverUrl": "http://192.168.200.145:9000/public/1/449ef328aa224deb8ade953bcf8a3a43/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      },
+      {
+        "id": 20,
+        "title": "test20",
+        "coverUrl": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      },
+      {
+        "id": 21,
+        "title": "test21",
+        "coverUrl": "http://192.168.200.145:9000/public/1/1cfc3c657851406b8badab7a0600bfd6/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      },
+      {
+        "id": 22,
+        "title": "test22",
+        "coverUrl": "http://192.168.200.145:9000/public/1/5d80e9e4e1ab475ea72473ab7286e063/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      },
+      {
+        "id": 23,
+        "title": "test23",
+        "coverUrl": "http://192.168.200.145:9000/public/1/e49517a891754779a90aa8588a6e8657/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
+      }
+    ],
+    "message": "操作成功"
+  },
+  "getVideoComments": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:31.000+00:00",
+        "sumLike": null,
+        "sumReply": null,
+        "isShow": 1
+      },
+      {
+        "id": 2,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:47.000+00:00",
+        "sumLike": null,
+        "sumReply": null,
+        "isShow": 1
+      },
+      {
+        "id": 3,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:47.000+00:00",
+        "sumLike": null,
+        "sumReply": null,
+        "isShow": 1
+      },
+      {
+        "id": 4,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:48.000+00:00",
+        "sumLike": null,
+        "sumReply": null,
+        "isShow": 1
+      },
+      {
+        "id": 5,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:48.000+00:00",
+        "sumLike": null,
+        "sumReply": null,
+        "isShow": 1
+      }
+    ],
+    "message": "操作成功"
+  },
+  "getDanmu": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 1,
+        "publishTime": "2023-12-05T16:00:00.000+00:00",
+        "isShow": null
+      },
+      {
+        "id": 2,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 2,
+        "publishTime": "2023-12-05T16:00:00.000+00:00",
+        "isShow": null
+      },
+      {
+        "id": 3,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 3,
+        "publishTime": "2023-12-05T16:00:00.000+00:00",
+        "isShow": null
+      },
+      {
+        "id": 4,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 4,
+        "publishTime": "2023-12-05T16:00:00.000+00:00",
+        "isShow": null
+      },
+      {
+        "id": 5,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 5,
+        "publishTime": "2023-12-05T16:00:00.000+00:00",
+        "isShow": null
+      },
+      {
+        "id": 6,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 6,
+        "publishTime": "2023-12-04T16:00:00.000+00:00",
+        "isShow": 0
+      },
+      {
+        "id": 7,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 7,
+        "publishTime": "2023-12-07T16:00:00.000+00:00",
+        "isShow": 1
+      },
+      {
+        "id": 8,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 8,
+        "publishTime": "2023-12-07T16:00:00.000+00:00",
+        "isShow": 1
+      },
+      {
+        "id": 9,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 9,
+        "publishTime": "2023-12-08T16:00:00.000+00:00",
+        "isShow": 1
+      },
+      {
+        "id": 10,
+        "userId": 1,
+        "videoId": 18,
+        "color": null,
+        "content": "test",
+        "pictureUrl": null,
+        "sumLike": null,
+        "isHot": null,
+        "timeStamp": 10,
+        "publishTime": "2023-12-08T16:00:00.000+00:00",
+        "isShow": 1
+      }
+    ],
+    "message": "操作成功"
+  },
+  "saveDanmu": {
+    "userId": "2",
+    "timeStamp": "16.805653",
+    "content": "情况",
+    "color": "#FFD302"
   }
 }

@@ -63,7 +63,8 @@ export const useStore = defineStore('main', {
                 content: '你好啊',
                 time: '2021-10-10 10:10:10'
             }
-        ]
+        ],
+        activeTab: 'first'
     }),
     getters: {
         doubleCount: (state) => state.count * 2

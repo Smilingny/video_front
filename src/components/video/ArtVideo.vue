@@ -1,14 +1,37 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Artplayer from "artplayer";
 import artplayerPluginDanmuku from "artplayer-plugin-danmuku";
+import {getDanmu, saveDanmu} from "@/api/danmu";
+import {jwtDecode} from "jwt-decode";
 
+const props = defineProps({
+  id: '',
+  url: ''
+})
 const artRef = ref(null)
+const testUrl = '../public/ynu.mp4'
+const token = localStorage.getItem('token')
+const userId = jwtDecode(token)['用户Id']
 
-onMounted(() => {
+onMounted(async () => {
+  const danmu = ref([])
+  await getDanmu(props.id).then((res) => {
+    const danmuRaw = res.data.data
+    for (let i = 0; i < danmuRaw.length; i++) {
+      danmu.value.push({
+        time: danmuRaw[i].timeStamp,
+        mode: 0,
+        color: 'red',
+        text: danmuRaw[i].content,
+      })
+    }
+    console.log(danmu.value)
+  })
+
   const art = new Artplayer({
     container: artRef.value,
-    url: 'ynu.mp4',
+    url: testUrl,
     setting: true,
     hotkey: true,
     fullscreen: true,
@@ -17,29 +40,7 @@ onMounted(() => {
     plugins: [
       artplayerPluginDanmuku({
         // 弹幕数组
-        danmuku: [
-          {
-            text: '111', // 弹幕文本
-            time: 1, // 发送时间，单位秒
-            color: '#fff', // 弹幕局部颜色
-            border: false, // 是否显示描边
-            mode: 0, // 弹幕模式: 0表示滚动, 1静止
-          },
-          {
-            text: '222',
-            time: 2,
-            color: 'red',
-            border: true,
-            mode: 0,
-          },
-          {
-            text: '333',
-            time: 3,
-            color: 'green',
-            border: false,
-            mode: 1,
-          },
-        ],
+        danmuku: danmu.value,
         speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
         opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
         fontSize: 10, // 字体大小，支持数字和百分比
@@ -57,6 +58,11 @@ onMounted(() => {
     ],
 
   })
+  art.on('artplayerPluginDanmuku:emit', (danmu) => {
+    saveDanmu(danmu, userId).then((res) => {
+      console.log(res)
+    })
+  });
 })
 </script>
 

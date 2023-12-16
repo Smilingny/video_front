@@ -1,4 +1,4 @@
-import axiosInstance from "@/axios";
+import {userAxiosInstance} from "@/axios";
 import qs from "qs";
 
 // 登陆
@@ -7,5 +7,5 @@ export const login = (user) => {
         username: user.username,
         password: user.password
     }
-    return axiosInstance.get('/login', qs.stringify(data))
+    return userAxiosInstance.get('/login', qs.stringify(data))
 }

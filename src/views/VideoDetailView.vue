@@ -2,8 +2,9 @@
 import VideoInfo from "@/components/video/VideoInfo.vue";
 import Comment from "@/components/video/Comment.vue";
 import {useRouter} from "vue-router";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import ArtVideo from "@/components/video/ArtVideo.vue";
+import {getVideoInfo} from "@/api/video";
 
 
 const router = useRouter();
@@ -22,8 +23,23 @@ window.addEventListener('scroll', function () {
   }
 })
 
+const id = router.currentRoute.value.query.id
 const head = ref(true)
+console.log("id")
+console.log(id)
+const owner = ref('')
+const title = ref('')
+const info = ref('')
+const url = ref('')
 
+getVideoInfo(id).then((res) => {
+  const data = res.data.data;
+  owner.value = data.username;
+  title.value = data.title;
+  info.value = data.briefIntro;
+  url.value = data.url;
+  console.log(url.value)
+})
 
 </script>
 
@@ -35,7 +51,7 @@ const head = ref(true)
     </div>
 
     <!--  视频-->
-    <ArtVideo @click="head=!head"/>
+    <ArtVideo @click="head=!head" :id="id" :url="url"/>
 
     <!--  广告-->
     <div class="ad">这是一条广告</div>
@@ -43,7 +59,7 @@ const head = ref(true)
     <van-tabs style="margin: 0 1rem" sticky offset-top="5vh">
       <!--    视频简介-->
       <van-tab title="简介" name="info" style="margin-top: 1rem">
-        <VideoInfo/>
+        <VideoInfo :owner="owner" :info="info" :title="title"/>
       </van-tab>
       <!--    评论-->
       <van-tab title="评论" name="comments" style="margin-top: 1rem">

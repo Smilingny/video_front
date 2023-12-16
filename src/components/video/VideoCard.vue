@@ -2,7 +2,30 @@
 
 import {ref} from "vue";
 import router from "@/router";
-
+const props = defineProps({
+  video: {
+    type: Object,
+    default: () => {
+      return {
+        id: 1,
+        title: '教父Ⅱ解说',
+        coverUrl: '../../public/god.jpg'
+      }
+    }
+  },
+  id: {
+    type: Number,
+    default: 1
+  },
+  title: {
+    type: String,
+    default: '教父解说'
+  },
+  coverUrl: {
+    type: String,
+    default: '../../public/god.jpg'
+  }
+})
 const videoHot = ref('123')
 const videoLike = ref('234')
 const videoLength = ref('11:46')
@@ -15,15 +38,18 @@ function submitFeedback(){
 
 }
 
+const toDetail = () => {
+  router.push({path: '/videoDetail/' + props.video.id, query: {id: props.video.id}})
+}
 </script>
 
 <template>
   <!--  电影卡片-->
   <div class="card">
-    <div class="card-part1" @click="router.push('/videoDetail')">
+    <div class="card-part1" @click="toDetail">
       <!--      图片-->
       <div class="img">
-        <img src="../../../public/god.jpg" style="height: 100%;width:100%;border-radius: 5px" alt="poster"/>
+        <img :src="props.video.coverUrl" style="height: 100%;width:100%;border-radius: 5px" alt="poster"/>
       </div>
       <div class="imgInfo">
         <!--        观看人数-->
@@ -47,7 +73,7 @@ function submitFeedback(){
     <div class="card-part2">
 
       <!--      视频标题-->
-      <p @click="router.push('/videoDetail')" class="title van-multi-ellipsis--l2">{{ videoTitle }}</p>
+      <p @click="toDetail" class="title van-ellipsis">{{ props.video.title }}</p>
       <div class="owner">
 
         <!--        视频作者-->
