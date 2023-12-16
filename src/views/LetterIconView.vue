@@ -13,7 +13,7 @@ function goToIndex(){
 
 
 const state = reactive({
-  url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+  url: '../../public/1.jpg'
 })
 /*存储相应的标题信息*：假设获取到的消息中，标题内容是一个数组对象 */
 const information = ref([
@@ -62,40 +62,50 @@ const {url} = toRefs(state)
 <template>
 <div class="wrapper">
 <!--头部-->
-  <div class="myHeader">
-    <span style="left: 0;position: absolute;margin-left: 1vw;color: white;font-size: 8vw">
-      <i class="fas fa-angle-left" @click="goToIndex"></i>
-    </span>
-    <div class="title">
-      <span>消息</span>
-    </div>
-  </div>
+  <van-nav-bar
+      title="消息"
+      left-text="返回"
+      left-arrow
+      @click-left="goToIndex"
+      style="--van-nav-bar-height:15vw"
+  />
 <!--图标和文字部分-->
-  <div class="iconAndWords">
-    <div class="part">
-      <i class="fas fa-comments" style="color: greenyellow"></i>
-      <span>回复我的</span>
+<!--  <div class="iconAndWords">-->
+<!--    <div class="part">-->
+<!--      <i class="fas fa-comments" style="color: greenyellow"></i>-->
+<!--      <span>回复我的</span>-->
 
-    </div>
-    <div class="part">
-      <i class="fas fa-at" style="color: yellow"></i>
-      <span>@我</span>
-    </div>
-    <div class="part">
-      <i class="far fa-thumbs-up" style="color: palevioletred"></i>
-      <span>收到的赞</span>
-    </div>
-    <div class="part">
-      <i class="fas fa-paper-plane" style="color: cornflowerblue"></i>
-      <span>系统通知</span>
-    </div>
-  </div>
+<!--    </div>-->
+<!--    <div class="part">-->
+<!--      <i class="fas fa-at" style="color: yellow"></i>-->
+<!--      <span>@我</span>-->
+<!--    </div>-->
+<!--    <div class="part">-->
+<!--      <i class="far fa-thumbs-up" style="color: palevioletred"></i>-->
+<!--      <span>收到的赞</span>-->
+<!--    </div>-->
+<!--    <div class="part">-->
+<!--      <i class="fas fa-paper-plane" style="color: cornflowerblue"></i>-->
+<!--      <span>系统通知</span>-->
+<!--    </div>-->
+<!-- -->
+<!--  </div>-->
+<!-- 宫格图标和文字 -->
+  <van-grid :column-num="2" >
+    <van-grid-item icon="chat" icon-color="greenyellow" text="评论" style="--van-grid-item-text-color:cornflowerblue"/>
+    <van-grid-item icon="guide-o" icon-color="cornflowerblue" text="通知" style="--van-grid-item-text-color:cornflowerblue"/>
+  </van-grid>
 <!--聊天列表部分-->
   <div class="chat">
     <div class="title">
       <p>聊天列表</p>
     </div>
-    <div class="list">
+    <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+    >
       <div class="listItem" v-for="item in information" @click="goToDetail(item)">
         <div class="left">
           <el-avatar :size="45" :src="item.url" style="margin-left: 2vw"/>
@@ -105,7 +115,7 @@ const {url} = toRefs(state)
           <span>{{ item.content }}</span>
         </div>
       </div>
-    </div>
+    </van-list>
   </div>
 <!--底部相关-->
   <Footer/>
@@ -120,7 +130,6 @@ const {url} = toRefs(state)
 
 }
 .wrapper .iconAndWords{
-  margin-top: 15vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -153,12 +162,12 @@ const {url} = toRefs(state)
 .wrapper .chat .title{
   display: flex;
   align-items: center;
- background-color: #8ec3eb;
+ background-color: white;
 
 }
 .wrapper .chat .title p{
   margin-top: 1vw;
-  color: white;
+  color: #63bbd0;
   margin-left: 1vw;
   height: 3vw;
 }
@@ -184,14 +193,14 @@ const {url} = toRefs(state)
   align-items: center;
   justify-content: center;
   width: 20vw;
-  background-color: #8ec3eb;
+  background-color: white;
   height: 15vw;
 }
 .wrapper .chat .list .listItem .right{
   display: flex;
   flex-direction: column;
   width: 80vw;
-  background-color: #8ec3eb;
+  background-color: white;
   height: 15vw;
 }
 /*设置标题样式*/
@@ -200,9 +209,42 @@ const {url} = toRefs(state)
   margin-left: 1.2vw;
   margin-bottom: 2vw;
   font-size: 5vw;
-  color: white;
+  color: #63bbd0;
 }
-.wrapper .chat .list .listItem .right span{
+.listItem .right span{
+  font-size: 3vw;
+  margin-left: 1.2vw;
+  color: #666;
+}
+.listItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.listItem .left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  background-color: white;
+  height: 15vw;
+}
+.listItem .right{
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  background-color: white;
+  height: 15vw;
+}
+/*设置标题样式*/
+.listItem .right p{
+  margin-top: 1.3vw;
+  margin-left: 1.2vw;
+  margin-bottom: 2vw;
+  font-size: 5vw;
+  color: #63bbd0;
+}
+.listItem .right span{
   font-size: 3vw;
   margin-left: 1.2vw;
   color: #666;

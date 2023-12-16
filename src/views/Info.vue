@@ -1,13 +1,22 @@
 <script setup>
 import {reactive, toRefs} from "vue";
 import Footer from "@/components/Footer.vue";
+import {useRouter} from "vue-router";
 
 const state = reactive({
-  url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+  url: '../../public/1.jpg',
 })
 
 const {url} = toRefs(state)
-
+const router = useRouter()
+/*路由到相应的编辑界面*/
+function goToEdite(){
+  router.push('/editeUserInfo')
+}
+/*前往后台管理界面*/
+function goToBack(){
+  router.push('/backgroundView')
+}
 </script>
 
 <template>
@@ -17,171 +26,174 @@ const {url} = toRefs(state)
       <!--头像部分-->
       <div class="top">
         <!--头像-->
-        <div class="left" style="flex: 1">
-          <el-avatar :size="45" :src="url" style="margin-left: 2vw"/>
+        <div class="left" style="width: 20%">
+          <van-image
+              round
+              width="15vw"
+              height="15vw"
+              :src="url"
+              style="margin-left: 2vw"
+          />
         </div>
         <!-- 相关个人信息-->
-        <div class="right" style="flex: 1">
-          <span style="color: white">昵称</span>
-          <i class="fas fa-edit" style="margin-left: 1vw;color: white"></i>
+        <div class="right" style="width: 80%">
+          <span style="color: #63bbd0">xxxxx</span>
         </div>
-        <div style="flex: 3"></div>
       </div>
       <!--数据显示部分-->
-      <div class="bottom">
-        <!--显示块-->
-        <div class="data" style=" border-right: 1px solid var(--el-border-color);">
-          <span>12</span>
-          <p>动态</p>
-        </div>
-        <div class="data" style=" border-right: 1px solid var(--el-border-color);">
+      <van-grid :column-num="2">
+        <van-grid-item class="data">
           <span>12</span>
           <p>关注</p>
-        </div>
-        <div class="data">
-          <span>12</span>
+        </van-grid-item>
+        <van-grid-item class="data">
+          <span >12</span>
           <p>粉丝</p>
-        </div>
-      </div>
+        </van-grid-item>
+      </van-grid>
     </div>
+
+
     <!--    中间部分-->
     <div class="center">
-      <!--视频相关-图标-->
-      <div class="video-icon">
-        <div class="icon">
-          <i class="far fa-folder"></i>
-          <p>离线缓存</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-history"></i>
-          <p>历史记录</p>
-        </div>
-        <div class="icon">
-          <i class="far fa-star"></i>
-          <p>我的收藏</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-pen"></i>
-          <p>创作中心</p>
-        </div>
-      </div>
-      <!--自定义模块_1-->
-      <div class="model_1">
-        <span>推荐服务</span>
-       <div class="content">
-         <div class="row">
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-           <div class="col">
-             <i class="far fa-star"></i>
-             <p>文字</p>
-           </div>
-         </div>
-       </div>
-      </div>
-      <div class="model_1">
-        <span>更多服务</span>
-        <div class="content">
-          <div class="line">
-<!--图标-->
-            <div class="left">
-              <i class="fas fa-users"></i>
-              <span>联系客服</span>
-            </div>
-<!--            图标-->
-            <div class="right">
-              <i class="fas fa-angle-right"></i>
-            </div>
-          </div>
-          <div class="line">
-            <!--图标-->
-            <div class="left">
-              <i class="fas fa-users"></i>
-              <span>青少年守护</span>
-            </div>
-            <!--            图标-->
-            <div class="right">
-              <i class="fas fa-angle-right"></i>
-            </div>
-          </div>
-          <div class="line">
-            <!--图标-->
-            <div class="left">
-              <i class="fas fa-users"></i>
-              <span>设置</span>
-            </div>
-            <!--            图标-->
-            <div class="right">
-              <i class="fas fa-angle-right"></i>
-            </div>
-          </div>
+      <van-cell title="编辑资料" is-link to="/editeUserInfo" />
+      <van-cell title="退出" is-link to="/login" />
+<!--      &lt;!&ndash;视频相关-图标&ndash;&gt;-->
+<!--      <div class="video-icon">-->
+<!--        <div class="icon">-->
+<!--          <i class="far fa-folder"></i>-->
+<!--          <p>离线缓存</p>-->
+<!--        </div>-->
+<!--        <div class="icon">-->
+<!--          <i class="fas fa-history"></i>-->
+<!--          <p>历史记录</p>-->
+<!--        </div>-->
+<!--        <div class="icon">-->
+<!--          <i class="far fa-star"></i>-->
+<!--          <p>我的收藏</p>-->
+<!--        </div>-->
+<!--        <div class="icon">-->
+<!--          <i class="fas fa-pen"></i>-->
+<!--          <p>创作中心</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;自定义模块_1&ndash;&gt;-->
+<!--      <div class="model_1">-->
+<!--        <span>推荐服务</span>-->
+<!--       <div class="content">-->
+<!--         <div class="row">-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--         </div>-->
+<!--         <div class="row">-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--         </div>-->
+<!--         <div class="row">-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--         </div>-->
+<!--         <div class="row">-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--           <div class="col">-->
+<!--             <i class="far fa-star"></i>-->
+<!--             <p>文字</p>-->
+<!--           </div>-->
+<!--         </div>-->
+<!--       </div>-->
+<!--      </div>-->
+<!--      <div class="model_1">-->
+<!--        <span>更多服务</span>-->
+<!--        <div class="content">-->
+<!--          <div class="line">-->
+<!--&lt;!&ndash;图标&ndash;&gt;-->
+<!--            <div class="left">-->
+<!--              <i class="fas fa-users"></i>-->
+<!--              <span>联系客服</span>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            图标&ndash;&gt;-->
+<!--            <div class="right">-->
+<!--              <i class="fas fa-angle-right"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="line">-->
+<!--            &lt;!&ndash;图标&ndash;&gt;-->
+<!--            <div class="left">-->
+<!--              <i class="fas fa-users"></i>-->
+<!--              <span>后台管理</span>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            图标&ndash;&gt;-->
+<!--            <div class="right">-->
+<!--              <i class="fas fa-angle-right" @click="goToBack"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="line">-->
+<!--            &lt;!&ndash;图标&ndash;&gt;-->
+<!--            <div class="left">-->
+<!--              <i class="fas fa-users"></i>-->
+<!--              <span>设置</span>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            图标&ndash;&gt;-->
+<!--            <div class="right">-->
+<!--              <i class="fas fa-angle-right"></i>-->
+<!--            </div>-->
+<!--          </div>-->
 
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <Footer></Footer>
   </div>
@@ -207,8 +219,9 @@ const {url} = toRefs(state)
 .wrapper .header .top {
   width: 100vw;
   height: 20vw;
-  background-color: #8ec3eb;
+  background-color: white;
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 }
@@ -219,7 +232,7 @@ const {url} = toRefs(state)
   align-items: center;
   width: 100vw;
   height: 15vw;
-  background-color: #8ec3eb;
+  background-color: white;
 }
 
 .wrapper .header .bottom .data {
@@ -245,7 +258,7 @@ const {url} = toRefs(state)
 }
 
 .wrapper .center {
-  margin-top: 35vw;
+  margin-top: 40vw;
 }
 
 .wrapper .center .video-icon {

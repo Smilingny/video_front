@@ -23,7 +23,6 @@ import Footer from "@/components/Footer.vue";
 .main {
   background-color: #f7f8fa;
   position: relative;
-  padding-top: 7vh;
   padding-bottom: 7vh;
 }
 
