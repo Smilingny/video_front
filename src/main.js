@@ -8,9 +8,8 @@ import {
     Button, Form, Field, CellGroup, Toast,
     Swipe, SwipeItem, Icon, Popup, Tab, Tabs,
     Image as VanImage, Collapse, CollapseItem,
-    Divider, Highlight, List, Barrage, PullRefresh
-    Divider, Highlight, List, Barrage,Uploader,Dialog,Switch,NavBar,Search,Tabbar,TabbarItem,
-    Grid,GridItem,Cell,Rate,RadioGroup,Radio
+    Divider, Highlight, List, Barrage, PullRefresh, Uploader, Dialog, Switch, NavBar, Search, Tabbar, TabbarItem,
+    Grid, GridItem, Cell, Rate, RadioGroup, Radio
 } from "vant";
 
 import 'vant/lib/index.css';
