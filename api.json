@@ -3,19 +3,21 @@
     "host": null,
     "code": 200,
     "data": {
-      "id": 4,
-      "videoId": 20,
+      "id": 12,
+      "videoId": 31,
       "type": "1080p60hz",
-      "username": "方小美",
-      "title": "test20",
-      "briefIntro": "\"E:\\深度学习原理及平台\\图像检测数据集\\图像检测数据集\\dataTF.zip\"",
-      "url": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/1080p60hz_test20/video/1080p60hz_test20.mp4",
+      "userId": 2,
+      "username": "小白",
+      "title": "好好好",
+      "briefIntro": "坏坏坏",
+      "url": "http://192.168.200.145:9000/public/1/de2a85e91f4540ca9d3e2468acb60861/1080p60hz_好好好/video/1080p60hz_好好好.mp4",
       "sumLike": 0,
       "sumCoins": 0,
       "sumCollect": 0,
       "sumShare": 0,
       "sumView": 0,
       "sumDanMu": 0,
+      "income": null,
       "publishTime": null
     },
     "message": "操作成功"
@@ -39,7 +41,7 @@
       },
       {
         "id": 19,
-        "title": "test19",
+        "title": "君不见，黄河之水天上来，奔流到海不复回。\n君不见，高堂明镜悲白发，朝如青丝暮成雪。\n人生得意须尽欢，莫使金樽空对月。\n天生我材必有用，千金散尽还复来。\n烹羊宰牛且为乐，会须一饮三百杯。\n岑夫子，丹丘生，将进酒，杯莫停。",
         "coverUrl": "http://192.168.200.145:9000/public/1/449ef328aa224deb8ade953bcf8a3a43/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg"
       },
       {
@@ -274,5 +276,384 @@
     "timeStamp": "10.470742",
     "content": "are",
     "color": "#FFFFFF"
-  }
+  },
+  "userVideoList": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 18,
+        "uuid": "e05cc2d3923f410996bff449234778d3",
+        "userId": 1,
+        "title": "test",
+        "briefIntro": "test",
+        "videoUrl": "http://192.168.200.145:9000/public/1/e05cc2d3923f410996bff449234778d3/small/video/small.mp4",
+        "coverUrl": "http://192.168.200.145:9000/public/1/e05cc2d3923f410996bff449234778d3/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg",
+        "sumLike": 0,
+        "sumCoins": 0,
+        "sumCollect": 0,
+        "sumShare": 0,
+        "sumView": 0,
+        "sumDanMu": 7,
+        "income": null,
+        "duration": 0,
+        "publishTime": "2021-06-01",
+        "status": 6,
+        "reason": "审核成功"
+      },
+      {
+        "id": 20,
+        "uuid": "c4bfffa8f89447b684bc0d72e049844b",
+        "userId": 1,
+        "title": "test20",
+        "briefIntro": "test20",
+        "videoUrl": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/small/video/small.mp4",
+        "coverUrl": "http://192.168.200.145:9000/public/1/c4bfffa8f89447b684bc0d72e049844b/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg",
+        "sumLike": 0,
+        "sumCoins": 0,
+        "sumCollect": 0,
+        "sumShare": 0,
+        "sumView": 0,
+        "sumDanMu": 0,
+        "income": null,
+        "duration": 0,
+        "publishTime": "2021-06-01",
+        "status": 6,
+        "reason": "审核成功"
+      },
+      {
+        "id": 22,
+        "uuid": "5d80e9e4e1ab475ea72473ab7286e063",
+        "userId": 1,
+        "title": "test22",
+        "briefIntro": "test22",
+        "videoUrl": "http://192.168.200.145:9000/public/1/5d80e9e4e1ab475ea72473ab7286e063/small/video/small.mp4",
+        "coverUrl": "http://192.168.200.145:9000/public/1/5d80e9e4e1ab475ea72473ab7286e063/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg",
+        "sumLike": 0,
+        "sumCoins": 0,
+        "sumCollect": 0,
+        "sumShare": 0,
+        "sumView": 0,
+        "sumDanMu": 0,
+        "income": null,
+        "duration": 0,
+        "publishTime": "2021-06-01",
+        "status": 6,
+        "reason": "审核成功"
+      },
+      {
+        "id": 25,
+        "uuid": "3f447b97bb1c4501b4acce30ff6315d4",
+        "userId": 1,
+        "title": "test25",
+        "briefIntro": "test25",
+        "videoUrl": "http://192.168.200.145:9000/public/1/3f447b97bb1c4501b4acce30ff6315d4/small/video/small.mp4",
+        "coverUrl": "http://192.168.200.145:9000/public/1/3f447b97bb1c4501b4acce30ff6315d4/3EDEABF87055B24EEA751C0BA7C13245/image/3EDEABF87055B24EEA751C0BA7C13245.jpg",
+        "sumLike": 0,
+        "sumCoins": 0,
+        "sumCollect": 0,
+        "sumShare": 0,
+        "sumView": 0,
+        "sumDanMu": 0,
+        "income": null,
+        "duration": 0,
+        "publishTime": "2021-06-01",
+        "status": 6,
+        "reason": "审核成功"
+      }
+    ],
+    "message": "操作成功"
+  },
+  "followedList": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 2,
+        "username": "小白",
+        "sex": true,
+        "signature": "够白",
+        "profilePhoto": null
+      },
+      {
+        "id": 3,
+        "username": "小黑",
+        "sex": true,
+        "signature": "帅气",
+        "profilePhoto": null
+      }
+    ],
+    "message": "查找成功"
+  },
+  "followList": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 2,
+        "username": "小白",
+        "sex": true,
+        "signature": "够白",
+        "profilePhoto": null
+      },
+      {
+        "id": 3,
+        "username": "小黑",
+        "sex": true,
+        "signature": "帅气",
+        "profilePhoto": null
+      },
+      {
+        "id": 673083393,
+        "username": "lijjsk",
+        "sex": true,
+        "signature": "",
+        "profilePhoto": ""
+      }
+    ],
+    "message": "查找成功"
+  },
+  "getComments": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:31.000+00:00",
+        "sumLike": 34,
+        "sumReply": 23,
+        "isDeleted": 0
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "userName": "张三",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:47.000+00:00",
+        "sumLike": 44,
+        "sumReply": 34,
+        "isDeleted": 0
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "userName": "李四",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:47.000+00:00",
+        "sumLike": 12,
+        "sumReply": 34,
+        "isDeleted": 0
+      },
+      {
+        "id": 4,
+        "userId": 4,
+        "userName": "王五",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:48.000+00:00",
+        "sumLike": 34,
+        "sumReply": 3,
+        "isDeleted": 0
+      },
+      {
+        "id": 5,
+        "userId": 5,
+        "userName": "刘二",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:48.000+00:00",
+        "sumLike": 12,
+        "sumReply": 34,
+        "isDeleted": 0
+      },
+      {
+        "id": 6,
+        "userId": 6,
+        "userName": "访美",
+        "profilePhoto": null,
+        "videoId": 18,
+        "content": "test",
+        "createdTime": "2023-12-07T13:25:49.000+00:00",
+        "sumLike": 12,
+        "sumReply": 23,
+        "isDeleted": 0
+      }
+    ],
+    "message": "操作成功"
+  },
+  "likeComment": {
+    "commentId": 1
+  },
+  "getReplies": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "userId": 1,
+        "userName": "方小美",
+        "profilePhoto": null,
+        "commentId": 1,
+        "content": "你好",
+        "createdTime": "2023-12-16T13:15:09.000+00:00",
+        "replyId": 2,
+        "replyName": "张三",
+        "sumLike": 0,
+        "isDeleted": 0
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "userName": "张三",
+        "profilePhoto": null,
+        "commentId": 1,
+        "content": "你好2",
+        "createdTime": "2023-12-16T13:16:01.000+00:00",
+        "replyId": 1,
+        "replyName": "方小美",
+        "sumLike": 0,
+        "isDeleted": 0
+      },
+      {
+        "id": 3,
+        "userId": 3,
+        "userName": "李二",
+        "profilePhoto": null,
+        "commentId": 1,
+        "content": "你好3",
+        "createdTime": "2023-12-16T13:16:05.000+00:00",
+        "replyId": 2,
+        "replyName": "张三",
+        "sumLike": 0,
+        "isDeleted": 0
+      }
+    ],
+    "message": "操作成功"
+  },
+  "saveComment": {
+    "userId": "3",
+    "videoId": "18",
+    "content": "地方附近"
+  },
+  "adApply": {
+    "userId": 3,
+    "realName": "23",
+    "phone": "12121212121",
+    "content": "seefdsdsdfsdf"
+  },
+  "applyState": {
+    "state": 2
+  },
+  "userAds": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "advertiserId": 1,
+        "content": "test",
+        "pictureUrl": "http://192.168.200.145:9000/public/1/40c331a529b540978dfdb6e844d11446/default/image/default.jpg",
+        "duration": 3,
+        "startTime": "2023-12-16T14:00:01.000+00:00",
+        "endTime": "2023-12-19T14:00:01.000+00:00",
+        "position": 1,
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "conversions": 0,
+        "conversion_Rate": null,
+        "status": 1
+      },
+      {
+        "id": 2,
+        "advertiserId": 1,
+        "content": "5555",
+        "pictureUrl": "http://192.168.200.145:9000/public/1/b3dfcfc2fe0542119b2d42d7046f2c93/default/image/default.jpg",
+        "duration": 3,
+        "startTime": "2023-12-16T14:05:24.000+00:00",
+        "endTime": "2023-12-19T14:05:24.000+00:00",
+        "position": 1,
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "conversions": 0,
+        "conversion_Rate": null,
+        "status": 1
+      }
+    ],
+    "message": "操作成功"
+  },
+  "allAds": {
+    "host": null,
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "advertiserId": 1,
+        "content": "test",
+        "pictureUrl": "http://192.168.200.145:9000/public/1/40c331a529b540978dfdb6e844d11446/default/image/default.jpg",
+        "duration": 3,
+        "startTime": "2023-12-16T14:00:01.000+00:00",
+        "endTime": "2023-12-19T14:00:01.000+00:00",
+        "position": 0,
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "conversions": 0,
+        "conversion_Rate": null,
+        "status": 1
+      },
+      {
+        "id": 2,
+        "advertiserId": 1,
+        "content": "5555",
+        "pictureUrl": "http://192.168.200.145:9000/public/1/b3dfcfc2fe0542119b2d42d7046f2c93/default/image/default.jpg",
+        "duration": 3,
+        "startTime": "2023-12-16T14:05:24.000+00:00",
+        "endTime": "2023-12-19T14:05:24.000+00:00",
+        "position": 0,
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "conversions": 0,
+        "conversion_Rate": null,
+        "status": 1
+      },
+      {
+        "id": 3,
+        "advertiserId": 1,
+        "content": "5555",
+        "pictureUrl": "http://192.168.200.145:9000/public/1/b3dfcfc2fe0542119b2d42d7046f2c93/default/image/default.jpg",
+        "duration": 3,
+        "startTime": "2023-12-16T14:05:24.000+00:00",
+        "endTime": "2023-12-19T14:05:24.000+00:00",
+        "position": 1,
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "conversions": 0,
+        "conversion_Rate": null,
+        "status": 1
+      }
+    ],
+    "message": "操作成功"
+  },
+  "clickAd": {
+    "advertisementId": 3
+  },
+  "convertAd": {
+    "advertisementId": 3
+  },
+  "register": {}
 }

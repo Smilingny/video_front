@@ -1,17 +1,28 @@
 <script setup>
-import {reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import Tabs from "@/components/ad/Tabs.vue";
 import JoinForm from "@/components/ad/JoinForm.vue";
 import {UserFilled} from "@element-plus/icons-vue";
+import {applyState, getAdApplyList} from "@/api/ad";
+
+const userId = localStorage.getItem('userId')
 
 // 0表示没有加入广告服务，1表示正在审核中，2表示已加入广告服务
-const state = ref(2)
+const state = ref(0)
 const dialogVisible = ref(false)
 
+
 const updateJoined = () => {
-  state.value = 1
+  state.value = 2
   dialogVisible.value = false
 }
+
+onMounted(() => {
+  applyState(userId).then((res) => {
+    state.value = res.data.status
+  })
+})
+
 </script>
 
 
@@ -27,7 +38,7 @@ const updateJoined = () => {
           <el-empty description="您还没有开通广告服务"/>
           <el-button type="primary" @click="dialogVisible=true">加入广告服务</el-button>
         </div>
-        <div v-else-if="state===1" class="notJoin">
+        <div v-else-if="state===2" class="notJoin">
           <el-empty description="正在审核中"/>
           <el-progress
               :percentage="100"

@@ -1,70 +1,100 @@
 <script setup>
 import {ref} from "vue";
 import VideoCard from "@/components/video/VideoCard.vue";
-import {showToast} from "vant";
+import {showFailToast, showSuccessToast, showToast} from "vant";
 import {getVideoList} from "@/api/video";
+import {getAllAds, clickAd, convertAd} from "@/api/ad";
+import {useStore} from "@/store";
 
+const store = useStore()
 const refreshLoading = ref(false)
-const count = ref(0)
+const showAd = ref(false)
 
-const images = ref([1, 2, 3, 4, 5])
-const loading = ref(false)
-const finished = ref(false)
-const pageNumber = ref(1)
-const pageSize = 20;
+const ads = store.ads
+const clickedAd = ref({})
 const videoList = ref([])
 
+//获取电影列表
 getVideoList().then((res) => {
   videoList.value = res.data.data
   console.log(videoList.value.length)
 }).catch((err) => {
   console.log(err)
 })
-const onRefresh = () => {
-  setTimeout(() => {
-    showToast('刷新成功');
-    refreshLoading.value = false;
-    count.value++;
-  }, 1000);
-}
-const nextPage = () => {
-  videoList.value.length += 10;
-  setTimeout(() => {
-    console.log(loading.value)
-    loading.value = false
-    console.log(loading.value)
-  }, 3000)
 
-  if (videoList.value.length > 40) {
-    finished.value = true;
-  }
+
+//获取广告
+if (store.ads.length === 0) {
+  getAllAds().then((res) => {
+    const data = res.data.data
+    console.log(data)
+    //将data逐个存入ads中，只存入position值为0的广告
+    data.forEach((item) => {
+      if (item.position === 0) {
+        store.ads.push(item)
+      }
+    })
+  })
+}
+
+//点击广告
+const clickAdvertisement = (id) => {
+  clickAd(id).then((res) => {
+    console.log(res.data)
+    showAd.value = true
+    clickedAd.value = store.getAdById(id)
+  })
+}
+
+//转化广告
+const convertAdvertisement = (id) => {
+  convertAd(id).then((res) => {
+    showSuccessToast('转化成功')
+  })
+}
+
+//刷新
+const onRefresh = () => {
+  getVideoList().then((res) => {
+    videoList.value = res.data.data
+    showSuccessToast('刷新成功')
+  }).catch((err) => {
+    showFailToast('刷新失败')
+  }).finally(() => {
+    refreshLoading.value = false
+  })
 }
 </script>
 
 <template>
   <div class="content">
-    <van-pull-refresh :v-model="refreshLoading" @refresh="onRefresh">
+    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh">
       <!--    顶部轮播图-->
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" lazy-render>
-        <van-swipe-item v-for="image in images">{{ image }}</van-swipe-item>
+        <van-swipe-item v-for="ad in ads">
+          <div @click="clickAdvertisement(ad.id)">
+            {{ ad.content }}
+          </div>
+        </van-swipe-item>
       </van-swipe>
 
       <!--    视频列表-->
-      <van-list
-          v-model:loading="loading"
-          :finished="finished"
-          finished-text="没有更多了"
-          @load="nextPage"
-      >
-        <div class="videoList">
-          <div v-for="video in videoList">
-            <VideoCard :video="video"/>
-          </div>
+      <div class="videoList">
+        <div v-for="video in videoList">
+          <VideoCard :video="video"/>
         </div>
-      </van-list>
+      </div>
     </van-pull-refresh>
   </div>
 
+  <!--  广告详情及转化-->
+  <van-popup v-model:show="showAd" round :style="{ padding: '10px' }">
+    <div class="adWrapper">
+      <p>{{ clickedAd.content }}</p>
+      <img :src="clickedAd.pictureUrl" alt="广告图片"/>
+      <van-button type="primary" @click="convertAdvertisement(clickedAd.id)">转化</van-button>
+    </div>
+  </van-popup>
 </template>
 
 <style scoped>
@@ -79,11 +109,20 @@ const nextPage = () => {
   line-height: 26vh;
   text-align: center;
   background-color: #39a9ed;
+  height: 26vh;
 }
 
 .videoList {
   position: relative;
   display: flex;
   flex-wrap: wrap
+}
+
+.adWrapper {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

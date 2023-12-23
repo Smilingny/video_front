@@ -1,7 +1,13 @@
 <script setup>
-
+import {reportVideo} from "@/api/video";
 import {ref} from "vue";
 import router from "@/router";
+import {showFailToast, showSuccessToast} from "vant";
+import {jwtDecode} from "jwt-decode";
+
+const token = localStorage.getItem('token')
+const userId = jwtDecode(token)['用户Id']
+
 const props = defineProps({
   video: {
     type: Object,
@@ -34,8 +40,14 @@ const videoOwner = ref('黑马')
 const showButton = ref(false)
 const feedback = ref('')
 
-function submitFeedback(){
-
+function submitReport() {
+  reportVideo(userId, props.video.id, feedback.value).then((res) => {
+    console.log(res.data)
+    showSuccessToast('举报成功')
+  }).catch((err) => {
+    console.log(err)
+    showFailToast('举报失败')
+  })
 }
 
 const toDetail = () => {
@@ -79,27 +91,27 @@ const toDetail = () => {
         <!--        视频作者-->
         <p style="font-size: 0.7rem" class="van-ellipsis">{{ videoOwner }}</p>
 
-        <!--        反馈按钮-->
+        <!--        举报按钮-->
         <van-icon @click="showButton=!showButton" name="question-o"/>
       </div>
     </div>
 
   </div>
 
-  <!--    反馈信息弹窗-->
+  <!--    举报信息弹窗-->
   <van-popup
       v-model:show="showButton"
       position="bottom"
       :style="{ height: '30%' }"
   >
     <div style="display: flex;justify-content: center;flex-direction: column">
-      <h2 style="text-align: center;margin: 1rem">反馈</h2>
+      <h2 style="text-align: center;margin: 1rem">举报</h2>
       <van-field
           v-model="feedback"
-          label="反馈内容"
-          placeholder="输入反馈内容"
+          label="举报内容"
+          placeholder="输入举报内容"
           :rules="[{ required: true, message: '请填写密码' }]"/>
-      <van-button @click="submitFeedback" type="primary" style="margin: 1rem">提交反馈</van-button>
+      <van-button @click="submitReport" type="primary" style="margin: 1rem">提交举报</van-button>
     </div>
   </van-popup>
 </template>

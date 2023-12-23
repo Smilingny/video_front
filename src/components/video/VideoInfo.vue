@@ -5,12 +5,13 @@ import router from "@/router";
 import {getVideoInfo} from "@/api/video";
 
 const props = defineProps({
+  ownerId: Number,
   owner: '',
   title: '',
   info: '',
 })
 
-const videoId = ref(1)
+
 const avatar = ref('../../public/god.jpg')
 const isFollow = ref(true)
 const activeName = ref([])
@@ -26,13 +27,17 @@ function cancelFollow() {
   isFollow.value = !isFollow.value
 }
 
+const toUserHome = () => {
+  router.push({path: '/userHome/', query: {user: props.ownerId}})
+}
+
 </script>
 
 <template>
 
   <!--  创作者-->
   <div class="owner">
-    <div style="display: flex; align-items: center" @click="router.push('userHome')">
+    <div style="display: flex; align-items: center" @click="toUserHome">
       <van-image round width="3rem" height="3rem" :src="avatar"/>
       <h3 style="margin: 0 1rem">{{ owner }}</h3>
     </div>

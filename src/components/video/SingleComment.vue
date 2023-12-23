@@ -1,6 +1,10 @@
 <script setup>
-
+import {likeComment, saveReply} from "@/api/comment";
 import {ref} from "vue";
+import {showSuccessToast} from "vant";
+
+const userId = localStorage.getItem('userId')
+const userName = localStorage.getItem('userName')
 
 const props = defineProps({
   comment: {
@@ -8,19 +12,47 @@ const props = defineProps({
   }
 })
 
+const replyContent = ref('')
+
 const showInput = ref(false)
 const replyTo = () => {
   showInput.value = true;
+}
+
+const emits = defineEmits(['add'])
+const sendReply = () => {
+  saveReply(userId, props.comment.id, replyContent.value).then((res) => {
+    showSuccessToast('发送成功')
+    const reply = {
+      toCommentId: props.comment.id,
+      toCommentator: props.comment.name,
+      time: new Date().toLocaleTimeString(),
+      name: userName,
+      agree: 0,
+      content: replyContent.value
+    }
+    emits('add', reply)
+  })
+  showInput.value = false;
+}
+
+//点赞评论
+const agree = (comment) => {
+  const commentId = comment.id;
+  likeComment(commentId).then((res) => {
+    console.log(res.data);
+    comment.agree += 1;
+  })
 }
 </script>
 
 <template>
   <div class="commentator">
     <!--        评论者头像-->
-    <van-image round width="2rem" height="2rem" :src="comment.user.avatar"/>
+    <van-image round width="2rem" height="2rem" :src="comment.avatar"/>
     <!--          评论者-->
     <div class="user">
-      <div class="name">{{ comment.user.name }}</div>
+      <div class="name">{{ comment.name }}</div>
       <div class="time">{{ comment.time }}</div>
     </div>
   </div>
@@ -37,9 +69,10 @@ const replyTo = () => {
     </p>
     <!--          点赞-->
     <div style="display: flex;align-items: center; color: darkgrey">
-      <van-icon name="good-job-o" @click="agree"/>
+      <van-icon name="good-job-o" @click="agree(comment)"/>
       {{ comment.agree }}
-      <van-icon name="comment-o" style="margin-left: 1rem" @click="replyTo"/>
+      <van-icon name="comment-o" style="margin: 0 0.5rem 0 1rem" @click="replyTo"/>
+      {{ comment.replyCounts }}
     </div>
   </div>
 
@@ -63,7 +96,7 @@ const replyTo = () => {
         round
         type="primary"
         plain
-        @click=""
+        @click="sendReply"
     >
       发送
     </van-button>
@@ -76,6 +109,7 @@ const replyTo = () => {
 .commentator {
   display: flex;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .user {

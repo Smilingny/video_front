@@ -2,76 +2,16 @@ import {defineStore} from "pinia";
 
 export const useStore = defineStore('main', {
     state: () => ({
-        chats: [
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'send',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'send',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'send',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'receive',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            },
-            {
-                type: 'send',
-                content: '你好啊',
-                time: '2021-10-10 10:10:10'
-            }
-        ],
+        ads: [],
+        chats: [],
         activeTab: 'first'
     }),
     getters: {
-        doubleCount: (state) => state.count * 2
+        //根据Id获取广告
+        getAdById: (state) => (id) => {
+            return state.ads.find(ad => ad.id === id)
+        }
     },
     actions: {
-        increment(additon) {
-            this.count += additon
-        }
     }
 })

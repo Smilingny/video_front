@@ -1,7 +1,10 @@
 <script setup>
-
+import {applyAd} from "@/api/ad";
 import {reactive, ref} from "vue";
+import {ElMessage} from "element-plus";
+import {jwtDecode} from "jwt-decode";
 
+const userId = localStorage.getItem('userId')
 const joinRef = ref(null)
 const joinInfo = reactive({
   name: '',
@@ -22,7 +25,10 @@ const submit = () => {
     // 表单校验成功
     if (valid) {
       console.log(joinInfo)
-
+      applyAd(userId, joinInfo.name, joinInfo.phone, joinInfo.content).then((res) => {
+        console.log(res)
+        ElMessage.success('提交成功')
+      })
       // 触发父组件updateJoin方法
       emits('updateJoin')
     }

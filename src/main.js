@@ -17,7 +17,6 @@ import 'normalize.css/normalize.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import mockWebSocket from "@/mockSocket";
 import {
     getCurDate,
     getLocalStorage,
@@ -29,7 +28,6 @@ import {
 
 const app = createApp(App)
 const pinia = createPinia()
-
 
 app.provide("$getCurDate", getCurDate)
 app.provide("$setSessionStorage", setSessionStorage)
@@ -43,11 +41,9 @@ app.use(pinia)
 
 app.use(Button).use(Form).use(Field).use(CellGroup).use(Toast).use(Swipe).use(SwipeItem).use(Icon).use(Popup)
     .use(Tab).use(Tabs).use(VanImage).use(Collapse).use(CollapseItem).use(Divider).use(Highlight).use(List)
-    .use(Barrage).use(PullRefresh)
-    .use(Barrage).use(Uploader).use(Dialog).use(Switch).use(NavBar).use(Search).use(Tabbar).use(TabbarItem).use(Grid).use(GridItem).use(Cell)
-    .use(Rate).use(RadioGroup).use(Radio);
+    .use(Barrage).use(PullRefresh).use(Barrage).use(Uploader).use(Dialog).use(Switch).use(NavBar).use(Search)
+    .use(Tabbar).use(TabbarItem).use(Grid).use(GridItem).use(Cell).use(Rate).use(RadioGroup).use(Radio);
 
 app.use(ElementPlus)
 
-app.provide('mockWebSocket', mockWebSocket)
 app.mount('#app')

@@ -1,4 +1,4 @@
-import {userAxiosInstance} from "@/axios";
+import {userAxiosInstance, loginAxiosInstance} from "@/axios";
 import qs from "qs";
 
 // 登陆
@@ -7,5 +7,47 @@ export const login = (user) => {
         username: user.username,
         password: user.password
     }
-    return userAxiosInstance.get('/login', qs.stringify(data))
+    return loginAxiosInstance.post('/login', data)
+}
+
+// 注册
+export const register = (user) => {
+    return userAxiosInstance.post('/register', user)
+}
+
+//获取粉丝列表
+export const getFans = (userId) => {
+    return userAxiosInstance.get('/followedUserList', {
+        params: {
+            userId: userId
+        }
+    });
+}
+
+//获取关注列表
+export const getFollow = (userId) => {
+
+    return userAxiosInstance.get('/followingUserList', {
+        params: {
+            userId: userId
+        }
+    });
+}
+
+// 关注
+export const follow = (userId, targetId) => {
+    const data = {
+        followed_id: userId,
+        following_id: targetId
+    }
+    return userAxiosInstance.put('/followUser', qs.stringify(data))
+}
+
+// 取消关注
+export const unfollow = (userId, targetId) => {
+    const data = {
+        followed_id: userId,
+        following_id: targetId
+    }
+    return userAxiosInstance.put('/unfollowUser', qs.stringify(data))
 }

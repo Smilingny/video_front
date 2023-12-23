@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const createAxiosInstance = (baseURL) => {
+const createAxiosInstance = (service) => {
+    const baseURL = 'http://10.100.187.89:51801' + service
     const instance = axios.create({
         baseURL,
         timeout: 3000,
@@ -12,7 +13,7 @@ const createAxiosInstance = (baseURL) => {
             if (config.url !== '/login' && config.url !== '/register') {
                 const token = localStorage.getItem('token');
                 if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
+                    config.headers.Authorization = token;
                 }
             }
             return config;
@@ -23,34 +24,44 @@ const createAxiosInstance = (baseURL) => {
     return instance;
 };
 
+// 登陆
+const loginAxiosInstance = createAxiosInstance('/authenticate');
 // 用户微服务
-// const userAxiosInstance = createAxiosInstance('http://10.100.24.66:51701');
-// // 视频微服务
-// const videoAxiosInstance = createAxiosInstance('http://10.100.24.66:51702');
-// // 弹幕微服务
-// const danmuAxiosInstance = createAxiosInstance('http://10.100.24.66:51703');
-// // 评论微服务
-// const commentAxiosInstance = createAxiosInstance('http://10.100.24.66:51704');
-// // 聊天微服务
-// const chatAxiosInstance = createAxiosInstance('http://10.100.24.66:51706');
-// // 统计微服务
-// const statisticsAxiosInstance = createAxiosInstance('http://10.100.24.66:51705');
-
-
-// 用户微服务
-const userAxiosInstance = createAxiosInstance('http://localhost:3000');
+const userAxiosInstance = createAxiosInstance('/user');
+// 管理服务
+const manageAxiosInstance = createAxiosInstance('/manage');
 // 视频微服务
-const videoAxiosInstance = createAxiosInstance('http://localhost:3000');
+const videoAxiosInstance = createAxiosInstance('/wemedia/video');
 // 弹幕微服务
-const danmuAxiosInstance = createAxiosInstance('http://localhost:3000');
+const danmuAxiosInstance = createAxiosInstance('/wemedia/barrage');
 // 评论微服务
-const commentAxiosInstance = createAxiosInstance('http://localhost:3000');
+const commentAxiosInstance = createAxiosInstance('/wemedia/comment');
+// 评论回复微服务
+const commentReplyAxiosInstance = createAxiosInstance('/wemedia/commentReply');
 // 聊天微服务
-const chatAxiosInstance = createAxiosInstance('http://localhost:3000');
+const chatAxiosInstance = createAxiosInstance('/wemedia/chat');
 // 统计微服务
-const statisticsAxiosInstance = createAxiosInstance('http://localhost:3000');
+const statisticsAxiosInstance = createAxiosInstance('/wemedia/statistics');
+// 广告服务
+const adAxiosInstance = createAxiosInstance('/wemedia/advertising')
+
+
+// // 用户服务
+// const userAxiosInstance = createAxiosInstance('http://localhost:3000');
+// // 视频微服务
+// const videoAxiosInstance = createAxiosInstance('http://localhost:3000');
+// // 弹幕微服务
+// const danmuAxiosInstance = createAxiosInstance('http://localhost:3000');
+// // 评论微服务
+// const commentAxiosInstance = createAxiosInstance('/comment');
+// // 聊天微服务
+// const chatAxiosInstance = createAxiosInstance('http://localhost:3000');
+// // 统计微服务
+// const statisticsAxiosInstance = createAxiosInstance('http://localhost:3000');
 
 export {
     userAxiosInstance, videoAxiosInstance, danmuAxiosInstance,
-    commentAxiosInstance, chatAxiosInstance, statisticsAxiosInstance
+    commentAxiosInstance, chatAxiosInstance, statisticsAxiosInstance,
+    commentReplyAxiosInstance, adAxiosInstance, manageAxiosInstance,
+    loginAxiosInstance
 };

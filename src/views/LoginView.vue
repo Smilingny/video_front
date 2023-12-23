@@ -4,20 +4,34 @@ import router from "@/router";
 import {showToast} from "vant";
 import {login} from "@/api/user";
 
+const route = router.currentRoute.value;
 const account = ref('');
 const password = ref('');
 const onSubmit = (user) => {
   console.log('submit', user);
   login(user).then((res) => {
-    console.log(res);
+    console.log(res.data);
     if (res.data) {
       localStorage.setItem('token', res.data.data.token);
+      localStorage.setItem('userInfo', JSON.stringify(res.data.data.userInfo));
+      localStorage.setItem('userId', res.data.data.userInfo.id);
+      localStorage.setItem('userName', res.data.data.userInfo.username);
       showToast({
         message: '登录成功',
         type: 'success',
         duration: 1000,
       });
-      router.push('/');
+
+      const currentRoutePath = route.matched[0].path;
+      console.log(currentRoutePath);
+      // 根据不同的登录页面进行判断
+      if (currentRoutePath === '/login') {
+        router.push('/'); // 这里是普通用户的主页路径
+      } else if (currentRoutePath === '/ad/login') {
+        router.push('/ad'); // 这里是广告用户的主页路径
+      } else if (currentRoutePath === '/admin/login') {
+        router.push('/admin-home'); // 这里是管理员的主页路径
+      }
     }
   }).catch((err) => {
     console.log(err);

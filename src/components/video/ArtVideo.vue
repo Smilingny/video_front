@@ -2,18 +2,32 @@
 import {computed, onMounted, ref} from "vue";
 import Artplayer from "artplayer";
 import artplayerPluginDanmuku from "artplayer-plugin-danmuku";
-import {getDanmu, saveDanmu} from "@/api/danmu";
-import {jwtDecode} from "jwt-decode";
+import {getDanmu, saveDanmu, reportDanmu} from "@/api/danmu";
+import {showFailToast, showSuccessToast} from "vant";
 
 const props = defineProps({
   id: '',
   url: ''
 })
 const artRef = ref(null)
-const testUrl = '../public/ynu.mp4'
-const token = localStorage.getItem('token')
-const userId = jwtDecode(token)['用户Id']
+const testUrl = '../../../public/ynu.mp4'
+const userId = localStorage.getItem('userId')
+const videoId = props.id
+const showBottom = ref(false)
+const reportId = ref()
+const reportContent = ref('')
 
+// 举报弹幕
+const report = () => {
+  reportDanmu(userId, reportId.value, reportContent.value).then((res) => {
+    showSuccessToast('举报成功')
+  }).catch((err) => {
+    showFailToast('举报失败')
+    showBottom.value = false
+  })
+}
+
+//获取弹幕列表
 onMounted(async () => {
   const danmu = ref([])
   await getDanmu(props.id).then((res) => {
@@ -23,17 +37,19 @@ onMounted(async () => {
         time: danmuRaw[i].timeStamp,
         mode: 0,
         color: 'red',
-        text: danmuRaw[i].content,
+        text: danmuRaw[i].id + '：' + danmuRaw[i].content,
       })
     }
     console.log(danmu.value)
   })
 
+  //初始化播放器
   const art = new Artplayer({
     container: artRef.value,
-    url: testUrl,
+    url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     setting: true,
     hotkey: true,
+    autoplay: false,
     fullscreen: true,
     miniProgressBar: true,
     autoOrientation: true,
@@ -56,10 +72,22 @@ onMounted(async () => {
         theme: 'light', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
       }),
     ],
+    controls: [
+      {
+        name: '弹幕举报',
+        index: 10,
+        position: 'right',
+        html: '<div style="border: 2px solid white; padding: 0 5px;border-radius: 5px;font-size: 0.75rem;">!</div>',
+        tooltip: '弹幕举报',
+        click: function () {
+          showBottom.value = true
+        },
+      }
+    ]
 
   })
   art.on('artplayerPluginDanmuku:emit', (danmu) => {
-    saveDanmu(danmu, userId).then((res) => {
+    saveDanmu(danmu, userId, videoId).then((res) => {
       console.log(res)
     })
   });
@@ -68,6 +96,28 @@ onMounted(async () => {
 
 <template>
   <div ref="artRef" class="video"></div>
+  <van-popup
+      v-model:show="showBottom"
+      position="bottom"
+      :style="{ height: '30%',display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}"
+  >
+    <p>弹幕举报</p>
+    <van-cell-group style="margin: 1rem">
+      <van-field
+          v-model="reportId"
+          label="违规弹幕id"
+          type="digit"
+          placeholder="请输入违规弹幕id"
+      />
+      <van-field
+          v-model="reportContent"
+          label="举报内容"
+          type="text"
+          placeholder="请输入举报内容"
+      />
+    </van-cell-group>
+    <van-button type="primary" @click="report">提交</van-button>
+  </van-popup>
 </template>
 
 <style scoped>

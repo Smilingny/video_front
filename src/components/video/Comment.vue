@@ -1,77 +1,92 @@
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import router from "@/router";
 import CommentDetail from "@/components/video/CommentDetail.vue";
+import {getComments, likeComment, reportComment, saveComment} from "@/api/comment";
+import {jwtDecode} from "jwt-decode";
+import {showFailToast, showSuccessToast} from "vant";
 
+const videoId = router.currentRoute.value.query.id
 const comments = ref([]);
 const newCommentContent = ref('');
 const replyContent = ref([]);
-const showInput = ref(false)
+const showReport = ref(false)
+const reportId = ref()
+const reportContent = ref()
 const showCommentDetail = ref(false)
-const detailCommentId = ref()
+const selectedComment = ref()
+const agreeIcon = ref()
+const userId = localStorage.getItem('userId')
+const userName = localStorage.getItem('userName')
+const commentDetailKey = ref(0)
 
-comments.value = [{
-  id: '1',
-  avatar: 'god.jpg',
-  name: '小明',
-  time: '2023-10-10',
-  agree: '123',
-  content: '非常好看',
-  replies: [
-    {content: "我也认为1偶分vv哦分VS反对v收费v欧舒丹和vu发表v发v副本v政府", from: '张三', to: '李四'},
-    {content: "我也认为2", from: '张三', to: '李二'},
-    {content: "我也认为3", from: '宋里', to: '李逵'},
-    {content: "我也认为4", from: '王鹏', to: '顶针'},
-    {content: "我也认为5", from: '雪豹', to: '小李'},
-    {content: "我也认为6", from: '张三', to: '李四'},
-    {content: "我也认为7", from: '张三', to: '李四'},
+//举报评论
+const report = (id) => {
+  showReport.value = true
+  reportId.value = id
+}
+const submitReport = () => {
+  reportComment(userId, reportId.value, reportContent.value).then((res) => {
+    showSuccessToast('举报成功')
+  }).catch((err) => {
+    showFailToast('举报失败')
+  })
+  reportContent.value = ''
+  showReport.value = false
+}
 
-  ]
-},
-  {
-    id: '2',
-    avatar: 'god.jpg',
-    name: '小李',
-    time: '2023-10-10',
-    agree: '123',
-    content: '非常好看',
-    replies: [
-      {content: "我也认为1", from: '张三', to: '李四'},
-      {content: "我也认为2", from: '张三', to: '李二麻子'},
-      {content: "我也认为3", from: '宋里', to: '李逵'},
-    ]
-  },
-  {
-    id: '3',
-    avatar: 'god.jpg',
-    name: '小王',
-    time: '2023-10-10',
-    agree: '123',
-    content: '非常好看',
-    replies: []
-  }]
+//获取评论列表
+onMounted(() => {
+  getComments(videoId).then((res) => {
+    for (const raw of res.data.data) {
+      const single = {}
+      single.id = raw.id
+      single.name = raw.userName
+      single.time = raw.createdTime.substring(0, 19)
+      single.content = raw.content
+      single.agree = raw.sumLike
+      single.replyCounts = raw.sumReply
+      comments.value.push(single)
+    }
+  })
+})
+
 
 // 发送新评论
 const sendComment = () => {
-  const newComment = {content: newCommentContent.value, replies: []};
-  comments.value.push(newComment);
-  newCommentContent.value = ''; // 清空评论框
+  saveComment(userId, videoId, newCommentContent.value).then((res) => {
+    showSuccessToast('发送成功')
+    const newComment = {
+      name: userName,
+      time: new Date().toLocaleString(),
+      content: newCommentContent.value,
+      agree: 0,
+      replyCounts: 0,
+    }
+    comments.value.push(newComment);
+    newCommentContent.value = ''; // 清空输入框
+  }).catch((err) => {
+    showFailToast('发送失败')
+    newCommentContent.value = ''; // 清空输入框
+  })
 };
 
 // 赞同评论
-const agree = () => {
-
+const agree = (comment) => {
+  const commentId = comment.id;
+  likeComment(commentId).then((res) => {
+    console.log(res.data);
+    comment.agree += 1;
+  })
 }
 
 // 进入评论详情
-function toDetail(commentId) {
-  detailCommentId.value = commentId;
+function toDetail(comment) {
+  selectedComment.value = comment;
   showCommentDetail.value = true;
 }
 
-const replyTo = () => {
-  showInput.value = true;
-}
+// 发送回复
 const sendReply = (index) => {
   const newReply = {content: replyContent.value[index]};
   comments.value[index].replies.push(newReply);
@@ -107,25 +122,26 @@ const sendReply = (index) => {
           <p>{{ comment.content }}</p>
           <!--          点赞-->
           <div style="display: flex;align-items: center; color: darkgrey">
-            <van-icon name="good-job-o" @click="agree"/>
+            <van-icon name="good-job-o" @click="agree(comment)" ref="agreeIcon"/>
             {{ comment.agree }}
-            <van-icon name="comment-o" style="margin-left: 1rem" @click="replyTo"/>
+            <van-icon name="comment-o" style="margin: 0 0.5rem 0 1rem"/>
+            {{ comment.replyCounts }}
+            <van-icon name="warn-o" style="margin-left: 1rem;" @click="report(comment.id)"/>
           </div>
 
-          <!--          回复区-->
-          <div class="replies">
-            <div v-for="(reply,index) in comment.replies" :key="index"
-                 style="display: flex; padding:0.2rem;width: 100%" class="van-ellipsis">
-              <van-highlight :keywords="reply.from" :source-string="reply.from"/>
-              回复
-              <van-highlight :keywords="reply.to" :source-string="reply.to"/>
-              ： {{ reply.content }}
-            </div>
-
-            <!--            点击展开全部回复-->
-            <div v-if="comment.replies.length" class="showMore" @click="toDetail(comment.id)">
-              更多 >
-            </div>
+          <!--          &lt;!&ndash;          回复区&ndash;&gt;-->
+          <!--          <div class="replies">-->
+          <!--            <div v-for="(reply,index) in comment.replies" :key="index"-->
+          <!--                 style="display: flex; padding:0.2rem;width: 100%" class="van-ellipsis">-->
+          <!--              <van-highlight :keywords="reply.from" :source-string="reply.from"/>-->
+          <!--              回复-->
+          <!--              <van-highlight :keywords="reply.to" :source-string="reply.to"/>-->
+          <!--              ： {{ reply.content }}-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--            点击展开全部回复-->
+          <div class="showMore" @click="toDetail(comment)">
+            更多 >
           </div>
         </div>
       </div>
@@ -153,29 +169,23 @@ const sendReply = (index) => {
     </div>
   </div>
 
-  <!--  输入评论弹出层-->
-  <van-popup
-      v-model:show="showInput"
-      position="bottom"
-      lazy-render
-      :style="{ height: '40%' }"
-      style="display: flex;flex-direction: column;align-items: center"
-  >
+  <!--  举报弹出层-->
+  <van-popup v-model:show="showReport" round :style="{ padding: '40px' }">
     <van-field
-        v-model="replyContent"
+        v-model="reportContent"
         rows="5"
         type="textarea"
-        placeholder="请输入内容"
-        style="border: 1px solid #ebedf0; margin:5vw; width: 90vw"
+        placeholder="请输入举报内容"
+        style="border: 1px solid #ebedf0; width: 100%"
     />
     <van-button
-        style="margin-right: 2rem; height: 2.5rem; "
+        style="margin: 1rem 2rem 0 0; height: 2.5rem;width: 100%"
         round
         type="primary"
         plain
-        @click=""
+        @click="submitReport"
     >
-      发送
+      提交
     </van-button>
   </van-popup>
 
@@ -185,8 +195,9 @@ const sendReply = (index) => {
       position="bottom"
       lazy-render
       :style="{ height: '70%' }"
+      @open="commentDetailKey++"
   >
-    <CommentDetail :comment-id="detailCommentId"/>
+    <CommentDetail :main-comment="selectedComment" :key="commentDetailKey"/>
   </van-popup>
 
 </template>
@@ -251,9 +262,8 @@ const sendReply = (index) => {
 }
 
 .showMore {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
   color: deepskyblue;
 }
 

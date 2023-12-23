@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import router from "@/router";
 import {showToast} from "vant";
+import {register} from "@/api/user";
 
 const account = ref('');
 const password = ref('');
@@ -20,12 +21,28 @@ const toLogin = () => {
 
 const onSubmit = (values) => {
   console.log('submit', values);
-  showToast({
-    message: '注册成功',
-    type: 'success',
-    duration: 1000,
-  });
-  toLogin();
+  const info = {}
+  info.username = values.account
+  info.password = values.password
+  console.log(info)
+  register(info).then((res) => {
+    console.log(res.data);
+    if (res.data) {
+      showToast({
+        message: '注册成功',
+        type: 'success',
+        duration: 1000,
+      });
+      toLogin();
+    }
+  }).catch((err) => {
+    console.log(err);
+    showToast({
+      message: '注册失败',
+      type: 'fail',
+      duration: 1000,
+    });
+  })
 };
 </script>
 

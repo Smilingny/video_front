@@ -1,50 +1,27 @@
 <script setup>
 import {computed, onMounted, reactive, ref} from "vue";
 import router from "@/router";
+import {getChatList} from "@/api/chat";
 
-const socket = new WebSocket('ws://localhost:8080/ws')
+const userId = localStorage.getItem('userId')
 
-const messageList = reactive([
-  {
-    id: 1,
-    name: '小明',
-    content: '你好啊',
-    newCount: 3,
-    time: '2021-10-10 10:10:10'
-  },
-  {
-    id: 2,
-    name: '小红',
-    content: '你好啊',
-    newCount: ref(5),
-    time: '2021-10-10 10:10:10'
-  },
-  {
-    id: 3,
-    name: '小明',
-    content: '你好啊',
-    newCount: 0,
-    time: '2021-10-10 10:10:10'
-  },
-  {
-    id: 4,
-    name: '小红',
-    content: '你好啊',
-    newCount: 0,
-    time: '2021-10-10 10:10:10'
-  },
-  {
-    id: 5,
-    name: '小明',
-    content: '你好啊',
-    newCount: 3,
-    time: '2021-10-10 10:10:10'
+const messageList = ref([])
+
+getChatList(userId).then((res) => {
+  const chatList = res.data.data
+  for (const chat of chatList) {
+    messageList.value.push({
+      sessionId: chat.sessionId,
+      friendId: chat.friendId,
+      friendName: chat.friendName
+    })
   }
-])
+})
+
 const emits = defineEmits(['updateMessage'])
 const update = () => {
   let total = 0
-  messageList.forEach(item => {
+  messageList.value.forEach(item => {
     total += item.newCount
   })
   emits('updateMessage', total)
@@ -56,6 +33,17 @@ onMounted(() => {
       emits('updateMessage', update())
     }
 )
+
+const toChat = (item) => {
+  router.push({
+    path: '/chat',
+    query: {
+      sessionId: item.sessionId,
+      friendId: item.friendId,
+      friendName: item.friendName
+    }
+  })
+}
 </script>
 
 <template>
@@ -65,14 +53,14 @@ onMounted(() => {
                           display: flex;
                           align-items: center;
                           justify-content: center;"
-             @click="router.push('/chat/'+item.id)"
+             @click="toChat(item)"
     >
       <div class="messageItemLeft">
         <el-avatar :size="50"/>
       </div>
       <div class="messageItemRight">
         <div class="messageItemRightTop">
-          <span class="name">{{ item.name }}</span>
+          <span class="name">{{ item.friendName }}</span>
           <span class="other">{{ item.time }}</span>
         </div>
         <div class="messageItemRightBottom">

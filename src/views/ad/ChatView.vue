@@ -1,25 +1,49 @@
 <script setup>
-import {inject, onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import router from "@/router";
 import {useStore} from "@/store";
 import {ArrowLeftBold} from "@element-plus/icons-vue";
 
-const webSocket = inject('mockWebSocket')
+
 const message = ref('')
 const chatScroll = ref(null)
-
-// 模拟 WebSocket 服务器
-
+const userId = localStorage.getItem('userId')
+const friendId = router.currentRoute.value.query.friendId
+const friendName = router.currentRoute.value.query.friendName
+const ws = 'ws://10.100.187.89:51801/chat?sender=' + userId + '&receiver=' + friendId
+const webSocket = new WebSocket(ws)
+const chats = ref([])
 // 监听连接
 webSocket.onopen = () => {
   console.log('WebSocket 连接已建立');
 };
 
-// 在这里可以使用 mockWebSocket，比如监听消息等
+webSocket.onerror = (error) => {
+  console.error('WebSocket 连接发生错误:', error);
+};
+
+//时间戳转换为时间格式
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+}
+
 webSocket.onmessage = event => {
   console.log('Received message:', event.data);
-  store.chats.push(event.data)
+  const chat = JSON.parse(event.data)
+  chat.time = formatTimestamp(chat.createdTime)
+  chats.value.push(chat)
+  console.log(friendId)
+  scrollToBottom();
 };
+
 
 const scrollToBottom = () => {
   setTimeout(() => {
@@ -27,79 +51,18 @@ const scrollToBottom = () => {
   }, 100)
 }
 const store = useStore()
-const chats = store.chats
-// const chats = reactive([
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'send',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'send',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'send',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'receive',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   },
-//   {
-//     type: 'send',
-//     content: '你好啊',
-//     time: '2021-10-10 10:10:10'
-//   }
-// ])
+
 const sendMessage = () => {
-  const messageInfo = {
-    type: 'send',
+  scrollToBottom();
+  webSocket.send(message.value)
+  const chat = {
+    sender: userId,
+    receiver: friendId,
     content: message.value,
     time: new Date().toLocaleString()
-  };
+  }
+  chats.value.push(chat)
   message.value = '';
-  console.log(store.chats)
-  scrollToBottom();
-  webSocket.send(messageInfo)
 }
 
 onMounted(() => {
@@ -114,14 +77,14 @@ onMounted(() => {
         <el-icon size="30" style="width: 50px;" @click="router.go(-1)">
           <ArrowLeftBold/>
         </el-icon>
-        <h2 style="margin: 20px auto;">张三</h2>
+        <h2 style="margin: 20px auto;">{{ friendName }}</h2>
       </div>
       <div class="main" ref="chatScroll">
         <div v-for="item in chats">
-          <p class="chat" :class="{chatLeft: item.type==='receive',chatRight: item.type==='send'}">
+          <p class="chat" :class="{chatLeft: item.receiver==userId,chatRight: item.sender==userId}">
             {{ item.content }}
           </p>
-          <span class="state" :class="{stateLeft: item.type==='receive',stateRight: item.type==='send'}">
+          <span class="state" :class="{stateLeft: item.receiver==userId,stateRight: item.sender==userId}">
               {{ item.time }}
             </span>
         </div>

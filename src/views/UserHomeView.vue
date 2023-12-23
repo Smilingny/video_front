@@ -1,8 +1,12 @@
 <script setup>
 
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import VideoList from "@/components/video/VideoList.vue";
 import router from "@/router";
+import {getUserVideoList} from "@/api/video";
+import {getFans, getFollow} from "@/api/user";
+
+const userId = router.currentRoute.value.query.user
 
 const avatar = ref('../../public/god.jpg')
 const fans = ref(12)
@@ -12,22 +16,32 @@ const name = ref('黑马')
 
 const loading = ref(false)
 const finished = ref(false)
-const pageNumber = ref(1)
-const pageSize = 20;
-const videoList = ref(10)
+const videoList = ref([])
 
-const nextPage = () => {
-  videoList.value += 10;
-  setTimeout(() => {
-    console.log(loading.value)
-    loading.value = false
-    console.log(loading.value)
-  }, 3000)
+onMounted(() => {
+  //获取发布的视频列表
+  getUserVideoList(userId).then((res) => {
+    videoList.value = res.data.data
+    console.log(videoList.value.length)
+  }).catch((err) => {
+    console.log(err)
+  })
 
-  if (videoList.value > 40) {
-    finished.value = true;
-  }
-}
+  //获取用户粉丝数
+  getFans(userId).then((res) => {
+    fans.value = res.data.data.length
+  }).catch((err) => {
+    console.log(err)
+  })
+
+  getFollow(userId).then((res) => {
+    follow.value = res.data.data.length
+  }).catch((err) => {
+    console.log(err)
+  })
+
+})
+
 </script>
 
 <template>
@@ -69,16 +83,11 @@ const nextPage = () => {
   <van-divider>动态</van-divider>
 
   <!--    视频列表-->
-  <van-list
-      v-model:loading="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="nextPage"
-  >
-    <div class="videoList">
-      <VideoList v-for="i in videoList"/>
+  <div class="videoList">
+    <div v-for="video in videoList">
+      <VideoList :video="video"/>
     </div>
-  </van-list>
+  </div>
 </template>
 
 <style scoped>
