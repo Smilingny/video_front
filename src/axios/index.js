@@ -40,28 +40,11 @@ const commentAxiosInstance = createAxiosInstance('/wemedia/comment');
 const commentReplyAxiosInstance = createAxiosInstance('/wemedia/commentReply');
 // 聊天微服务
 const chatAxiosInstance = createAxiosInstance('/wemedia/chat');
-// 统计微服务
-const statisticsAxiosInstance = createAxiosInstance('/wemedia/statistics');
 // 广告服务
 const adAxiosInstance = createAxiosInstance('/wemedia/advertising')
 
-
-// // 用户服务
-// const userAxiosInstance = createAxiosInstance('http://localhost:3000');
-// // 视频微服务
-// const videoAxiosInstance = createAxiosInstance('http://localhost:3000');
-// // 弹幕微服务
-// const danmuAxiosInstance = createAxiosInstance('http://localhost:3000');
-// // 评论微服务
-// const commentAxiosInstance = createAxiosInstance('/comment');
-// // 聊天微服务
-// const chatAxiosInstance = createAxiosInstance('http://localhost:3000');
-// // 统计微服务
-// const statisticsAxiosInstance = createAxiosInstance('http://localhost:3000');
-
 export {
     userAxiosInstance, videoAxiosInstance, danmuAxiosInstance,
-    commentAxiosInstance, chatAxiosInstance, statisticsAxiosInstance,
-    commentReplyAxiosInstance, adAxiosInstance, manageAxiosInstance,
-    loginAxiosInstance
+    commentAxiosInstance, chatAxiosInstance, commentReplyAxiosInstance,
+    adAxiosInstance, manageAxiosInstance, loginAxiosInstance
 };
