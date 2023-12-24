@@ -15,7 +15,7 @@ export const saveDanmu = (danmu, userId, videoId) => {
     const data = {
         userId: userId,
         videoId: videoId,
-        timeStamp: danmu.time,
+        timeStamp: Math.round(danmu.time),
         content: danmu.text,
         color: danmu.color,
     }

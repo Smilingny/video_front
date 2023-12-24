@@ -18,24 +18,11 @@ const props = defineProps({
         coverUrl: '../../public/god.jpg'
       }
     }
-  },
-  id: {
-    type: Number,
-    default: 1
-  },
-  title: {
-    type: String,
-    default: '教父解说'
-  },
-  coverUrl: {
-    type: String,
-    default: '../../public/god.jpg'
   }
 })
 const videoHot = ref('123')
 const videoLike = ref('234')
 const videoLength = ref('11:46')
-const videoTitle = ref('教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说,教父Ⅱ解说')
 const videoOwner = ref('黑马')
 const showButton = ref(false)
 const feedback = ref('')
@@ -64,16 +51,16 @@ const toDetail = () => {
         <img :src="props.video.coverUrl" style="height: 100%;width:100%;border-radius: 5px" alt="poster"/>
       </div>
       <div class="imgInfo">
-        <!--        观看人数-->
+        <!--        弹幕数-->
         <div class="info">
           <van-icon name="play-circle-o"/>
-          <p>{{ videoHot }}</p>
+          <p>{{ video.sumDanMu }}</p>
         </div>
 
         <!--        点赞人数-->
         <div class="info">
-          <van-icon name="like-o"/>
-          <p>{{ videoLike }}</p>
+          <van-icon name="comment-o"/>
+          <p>{{ video.sumComment }}</p>
         </div>
 
         <!--        视频时长-->

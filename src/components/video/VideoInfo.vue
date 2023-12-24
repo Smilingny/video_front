@@ -1,8 +1,9 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watchEffect} from "vue";
 import router from "@/router";
-import {getVideoInfo} from "@/api/video";
+import {follow, unfollow, getFans} from "@/api/user";
+import {showSuccessToast} from "vant";
 
 const props = defineProps({
   ownerId: Number,
@@ -13,18 +14,39 @@ const props = defineProps({
 
 
 const avatar = ref('../../public/god.jpg')
-const isFollow = ref(true)
+const isFollow = ref(false)
 const activeName = ref([])
+const userId = localStorage.getItem('userId')
+
+watchEffect(() => {
+  if (props.ownerId) {
+    getFans(props.ownerId).then((res) => {
+      const fans = res.data.data;
+      for (const fan of fans) {
+        if (fan.id == userId) {
+          isFollow.value = true;
+          break;
+        }
+      }
+    });
+  }
+});
 
 
 // 点击关注
-function follow() {
-  isFollow.value = !isFollow.value
+function doFollow() {
+  follow(userId, props.ownerId).then((res) => {
+    isFollow.value = !isFollow.value
+    showSuccessToast('关注成功')
+  })
 }
 
 // 取消关注
 function cancelFollow() {
-  isFollow.value = !isFollow.value
+  unfollow(userId, props.ownerId).then((res) => {
+    isFollow.value = !isFollow.value
+    showSuccessToast('取消关注成功')
+  })
 }
 
 const toUserHome = () => {
@@ -43,8 +65,8 @@ const toUserHome = () => {
     </div>
 
     <!--    关注按钮-->
-    <van-button round type="success" v-if="isFollow" @click="follow" class="follow">＋关注</van-button>
-    <van-button round type="default" v-if="!isFollow" @click="cancelFollow" class="follow">已关注</van-button>
+    <van-button round type="success" v-if="!isFollow" @click="doFollow" class="follow">＋关注</van-button>
+    <van-button round type="default" v-if="isFollow" @click="cancelFollow" class="follow">已关注</van-button>
   </div>
 
   <!--  电影信息-->

@@ -51,7 +51,7 @@ const handleRemove = (file) => {
 
 const handlePictureCardPreview = (file) => {
   dialogImageUrl.value = file.url
-  console.log(file.url);
+  console.log('图片地址：', file.url);
   dialogVisible.value = true
 }
 

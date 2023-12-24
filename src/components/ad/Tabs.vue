@@ -3,7 +3,7 @@ import {onMounted, reactive, ref} from 'vue'
 import NewAd from "@/components/ad/NewAd.vue";
 import Message from "@/components/ad/Message.vue";
 import {useStore} from "@/store";
-import {getAd, removeAd} from "@/api/ad";
+import {getAd, stopAd} from "@/api/ad";
 import {jwtDecode} from "jwt-decode";
 import {ElMessage} from "element-plus";
 import AdDetail from "@/components/ad/AdDetail.vue";
@@ -24,18 +24,21 @@ const getAds = () => {
   })
 }
 getAds()
-//删除推广
+
+// 停用广告
 const deleteAd = (id) => {
-  removeAd(id).then((res) => {
+  stopAd(id).then((res) => {
     if (res.data.code === 200) {
-      ElMessage.success('删除成功')
-      //根据id删除tableData中的对象
-      tableData.value = tableData.value.filter((item) => {
-        return item.id !== id
+      ElMessage.success('停用成功')
+      //根据id修改tableData中的status为0
+      tableData.value.forEach((item) => {
+        if (item.id === id) {
+          item.status = 0
+        }
       })
       console.log(tableData.value)
     } else {
-      ElMessage.error('删除失败')
+      ElMessage.error('停用失败')
     }
   })
 }
@@ -71,15 +74,26 @@ const updateMessage = (message) => {
       <div class="wrapper">
         <h2>推广列表</h2>
         <el-table :data="tableData" stripe border style="width: 80%">
-          <el-table-column prop="id" label="ID" width="180"/>
+          <el-table-column prop="status" label="状态" width="180">
+            <template #default="scope">
+              <el-tag v-if="scope.row.status === 1" type="success">投放中</el-tag>
+              <el-tag v-else type="danger">已停止</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="startTime" label="创建时间" width="180"/>
           <el-table-column prop="duration" label="持续时间" width="180"/>
-          <el-table-column prop="position" label="广告位置" width="180"/>
+          <el-table-column prop="position" label="广告位置" width="180">
+            <template #default="scope">
+              <el-tag v-if="scope.row.position === 1" type="success">首页</el-tag>
+              <el-tag v-else type="primary">视频详情页</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column prop="content" label="广告内容" show-overflow-tooltip/>
           <el-table-column label="操作" width="180">
             <template #default="scope">
               <el-button type="success" size="small" @click="toDetail(scope.row)">查看</el-button>
-              <el-button type="danger" size="small" @click="deleteAd(scope.row.id)">删除</el-button>
+              <el-button type="danger" v-if="scope.row.status === 1" size="small" @click="deleteAd(scope.row.id)">停止
+              </el-button>
             </template>
           </el-table-column>
         </el-table>

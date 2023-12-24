@@ -37,17 +37,17 @@ export const getFollow = (userId) => {
 // 关注
 export const follow = (userId, targetId) => {
     const data = {
-        followed_id: userId,
-        following_id: targetId
+        following_id: userId,
+        followed_id: targetId
     }
-    return userAxiosInstance.put('/followUser', qs.stringify(data))
+    return userAxiosInstance.put('/followUser', data)
 }
 
 // 取消关注
 export const unfollow = (userId, targetId) => {
     const data = {
-        followed_id: userId,
-        following_id: targetId
+        following_id: userId,
+        followed_id: targetId
     }
-    return userAxiosInstance.put('/unfollowUser', qs.stringify(data))
+    return userAxiosInstance.put('/unfollowUser', data)
 }

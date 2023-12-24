@@ -35,12 +35,14 @@ export const getAd = (userId) => {
     });
 }
 
-//删除广告
-export const removeAd = (adId) => {
-    const data = {
-        advertisementId: adId
-    }
-    return adAxiosInstance.delete('/remove/advertisement', qs.stringify(data));
+//停用广告
+export const stopAd = (adId) => {
+
+    return adAxiosInstance.delete('/stop/advertisement', {
+        params: {
+            advertisementId: adId
+        }
+    });
 }
 
 //获取所有广告

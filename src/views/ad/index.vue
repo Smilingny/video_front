@@ -6,9 +6,10 @@ import {UserFilled} from "@element-plus/icons-vue";
 import {applyState, getAdApplyList} from "@/api/ad";
 
 const userId = localStorage.getItem('userId')
+const userName = localStorage.getItem('userName')
 
-// 0表示没有加入广告服务，1表示正在审核中，2表示已加入广告服务
-const state = ref(0)
+// 0表示没有加入广告服务，2表示正在审核中，1表示已加入广告服务
+const state = ref(1)
 const dialogVisible = ref(false)
 
 
@@ -31,7 +32,10 @@ onMounted(() => {
     <el-container>
       <el-header class="header">
         <h2>广告服务</h2>
-        <el-avatar style="margin-left: auto;" :icon="UserFilled"/>
+        <div style="margin-left: auto;display: flex; align-items: center">
+          <p style="margin-right: 1rem;">{{ userName }}</p>
+          <el-avatar :icon="UserFilled"/>
+        </div>
       </el-header>
       <el-main class="main">
         <div v-if="state===0" class="notJoin">

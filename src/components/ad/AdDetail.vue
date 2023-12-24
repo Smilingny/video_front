@@ -16,7 +16,8 @@ const props = defineProps({
     </div>
     <div class="info">
       <span>广告位置：</span>
-      {{ adDetail.position }}
+      <span v-if="adDetail.position === 1">首页</span>
+      <span v-else>视频详情页</span>
     </div>
     <div class="info">
       <span>广告持续时间：</span>
@@ -36,7 +37,7 @@ const props = defineProps({
     </div>
     <div class="info">
       <span>转化率：</span>
-      {{ adDetail.conversion_Rate }}
+      {{ adDetail.conversionRate }}
     </div>
   </div>
 
